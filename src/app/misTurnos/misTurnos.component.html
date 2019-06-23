@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+
+<br>
+<!--
+<div class="pd">
+   <app-busqueda [listaTurnos]="Turnos" (filtro)="mostrarDatos($event)"></app-busqueda>
+</div> -->
+<br>
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Cod. Reserva</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Especialista</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Estado</th>
+                <th scope="col"><button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalNuevoTurno">Nuevo Turno</button>
+                </th>
+                <!-- <th scope="col">Foto</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of turnos; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{p.especilidad}}</td>
+                <td>{{p.especialista}}</td>
+                <td>{{p.fecha_hora.seconds*1000 | date}}</td>
+                <td>{{p.estado}}</td>
+                <!--  <td class="thmb">
+                    <img [src]='"../../assets/img"+p.foto' class="img-fluid img-thumbnail">
+                </td>-->
+                <td>
+                    <button class="btn btn-primary" (click)="modificarTurno($event.target.value)">Modificar</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="cancelarTurno($event.target.value)">Cancelar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- MODAL -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Resultado Busqueda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <!-- <app-mostrar [listaTurnos]="TurnosModal"></app-mostrar> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<app-modalNuevoTurno></app-modalNuevoTurno>

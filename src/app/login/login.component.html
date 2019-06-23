@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+    <!-- Page Content -->
+    <div class="row text-center container-fluid">
+        <div class="col-7" id="imageLogin">
+        </div>
+        <div class="col text-center card">
+            <br>
+            <br>
+            <div class="card-header">
+                <h1>Bienvenido a <br> Buena Sonrisa</h1>
+                <span class="icon-bar"> <i class="fa fa-tooth"></i> </span>
+            </div>
+            <div class="card-body">
+                <form class="form-login" (submit)="onLogin()"><br>
+                    <h4>Ingreso al sistema de turnos</h4>
+                    <br>
+                    <!-- [(ngModel)]="user.email" -->
+                    <input type="email" [(ngModel)]="email" name='email' id="userName" class="form-control input-sm chat-input" placeholder="Email" />
+                    <br>
+                    <!-- [(ngModel)]="user.clave" -->
+                    <input type="password" [(ngModel)]="pass" id="userPassword" name="clave" class="form-control input-sm chat-input" placeholder="Contraseña" />
+                    <br><br>
+
+                    <div class="form-group">
+                        <span class="group-btn">
+                             <button type="submit" class="btn btn-block btn-primary btn-md">Ingresar <i class="fa fa-sign-in"> </i></button>
+                             <button class="btn btn-block btn-social btn-facebook" (click)="onLoginFacebook()"><span class="fa fa-facebook"></span> Facebook </button>
+                        <button class="btn btn-block btn-social btn-google" (click)="onLoginGoogle()"><span class="fa fa-google"></span> Google </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-block btn-warning btn-md" routerLink="/registrarse">
+                          Registrarse <i class="far fa-id-card-alt"></i></button>
+                <br>
+                <br>
+                <a href="#" class="btn btn-link" style="font-size: 18px;"> Se olvido la contraseña?</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

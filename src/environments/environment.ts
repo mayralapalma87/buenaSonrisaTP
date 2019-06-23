@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig : {
+    apiKey:  'AIzaSyCgJn_cfNdeVrWyuadD4lO7sDX82AAbyc8',
+    authDomain:  'buenasonrisa-lab4.firebaseapp.com',
+    databaseURL:  'https://buenasonrisa-lab4.firebaseio.com',
+    projectId:  'buenasonrisa-lab4',
+    storageBucket:  'buenasonrisa-lab4.appspot.com',
+    messagingSenderId:  '633498859008',
+    appId:  '1:633498859008:web:b321b9ed94c2aaf6'
+// tslint:disable-next-line: semicolon
+  }
 };
 
 /*
