@@ -10,4 +10,6 @@ export interface turnoInteface {
   encuesta?: any;
   estado?: string;
   fecha_hora?: any;
+  hora_disponible?: any;
+  resena_especialista?: string;
 }

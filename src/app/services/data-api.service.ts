@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChangeDetectorStatus } from '@angular/core/src/change_detection/constants';
-import { TurnosService } from './turnos.service';
 import * as firebase from 'firebase';
 import { Especialidad } from '../models/especialidad';
 import { User } from '../models/user';
@@ -60,9 +59,8 @@ export class DataApiService {
         });
       }));
   }
-
   getEspecialistas() {
-    return this.especialistas = this.listaEspecialistas.snapshotChanges()
+     return this.especialistas = this.listaEspecialistas.snapshotChanges()
       .pipe(map(changes => {
         return changes.map(action => {
           const data = action.payload.doc.data() as Especialistas;
@@ -71,7 +69,6 @@ export class DataApiService {
         });
       }));
   }
-
   getEspecialidades() {
     return this.especialidades = this.listaEspecialidad.snapshotChanges()
       .pipe(map(changes => {
@@ -140,7 +137,7 @@ export class DataApiService {
     this.listaTurnos.add(turno);
   }
   modificarTurno(turno: turnoInteface) {
-    let idTurno = turno.id;
+    const idTurno = turno.id;
     this.turnoDoc = this.afs.doc<turnoInteface>(`turnos/${idTurno}`);
     this.turnoDoc.update(turno);
   }
