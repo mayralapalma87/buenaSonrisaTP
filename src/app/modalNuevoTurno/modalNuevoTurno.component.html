@@ -11,51 +11,36 @@
             </div>
             <div class="modal-body">
                 <form name="formTurno" #formTurno="ngForm" (ngSubmit)="onSaveTurno(formTurno)">
-                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
+                    <input name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
                     <input type="hidden" name="userUid" [value]="userUid">
-                    <div class="form-group">
-                        <label for="titulo" class="col-form-label">Titulo:</label>
-                        <input type="text" class="form-control" name="titulo">
-                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="idioma">Idioma</label>
-                            <select name="idioma" class="form-control">
-                  <option value="Inglés">Inglés</option>
-                  <option value="Castellano">Castellano</option>
-                </select>
+                            <label for="especialidad">Especialidad:</label>
+                            <select name="especialidad" class="form-control" [(ngModel)]="this.dataApi.selectedTurno.especialidad">
+                                <option *ngFor="let especialidad of especialidades">
+                                    {{especialidad.descripcion}}
+                                  </option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="precio">Precio</label>
-                            <input type="text" name="precio" class="form-control" placeholder="0,00€">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="autor">Autor</label>
-                            <input type="text" name="autor" class="form-control" placeholder="Autor">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="oferta">Oferta</label>
-                            <select name="oferta" class="form-control">
-                  <option value="1">Sí</option>
-                  <option value="0">No</option>
-                </select>
+                            <label for="especialista">Especialista:</label>
+                            <select name="especialista" class="form-control" [(ngModel)]="this.dataApi.selectedTurno.especialista">
+                                <option *ngFor="let espec of especialistas">
+                                  {{espec.matricula}}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="portada">Portada</label>
-                            <input type="text" name="portada" class="form-control" placeholder="Portada">
+                            <label for="fecha_hora">Fecha</label>
+                            <div class='input-group date' id='datetimepicker'>
+                                <input type='datetime-local' class="form-control" name="fecha_hora" placeholder="dd/mm/aaaa" [(ngModel)]="this.dataApi.selectedTurno.fecha_hora" />
+                                <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="link_amazon">Link Amazon</label>
-                            <input type="text" name="link_amazon" class="form-control" placeholder="Link amazon">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion" class="col-form-label">Descripcion:</label>
-                        <textarea class="form-control" name="descripcion"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Salir</button>

@@ -23,16 +23,16 @@ export class MisTurnosComponent implements OnInit {
       this.turnos = turnos;
     });
   }
-  nuevoTurno() {
-    // tslint:disable-next-line: no-debugger
-    //$('#modalNuevoTurno').modal('toggle');
+  cancelarTurno(idTurno: string) {
+    const confirmacion = confirm('Esta seguro que desea cancelar este turno?');
+    if (confirmacion) {
+      this.dataApi.borrarTurno(idTurno);
+    }
   }
-  cancelarTurno() {
+  modificarTurno(turno: turnoInteface) {
+    this.dataApi.selectedTurno = Object.assign({}, turno);
   }
-  modificarTurno() {
-  }
-  agregarTurno() {
-  }
+
   public reiniciar() {
     this.turnos = [];
   }

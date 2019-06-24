@@ -50,7 +50,6 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    FontAwesomeModule
   ],
   providers: [
     AngularFireAuth,
@@ -59,8 +58,4 @@ import { environment } from 'src/environments/environment';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
-    // Add an icon to the library for convenient access in other components
-    library.add(faCoffee);
-  }
 }
