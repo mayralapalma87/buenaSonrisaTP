@@ -11,12 +11,12 @@
             </div>
             <div class="modal-body">
                 <form name="formTurno" #formTurno="ngForm" (ngSubmit)="onSaveTurno(formTurno)">
-                    <input name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
-                    <input type="hidden" name="userUid" [value]="userUid">
+                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
+                    <input type="hidden" name="userUid" [value]="userId">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="especialidad">Especialidad:</label>
-                            <select name="especialidad" class="form-control" [(ngModel)]="this.dataApi.selectedTurno.especialidad">
+                            <select name="especialidad" class="form-control" placeholder="Seleccione..." [value]=this.especialidades[0] [(ngModel)]="this.dataApi.selectedTurno.especialidad">
                                 <option *ngFor="let especialidad of especialidades">
                                     {{especialidad.descripcion}}
                                   </option>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="especialista">Especialista:</label>
-                            <select name="especialista" class="form-control" [value]="" [(ngModel)]="this.dataApi.selectedTurno.especialista">
+                            <select name="especialista" class="form-control" placeholder="Seleccione..." [value]=this.especialistas[0] [(ngModel)]="this.dataApi.selectedTurno.especialista">
                                 <option *ngFor="let espec of this.especialistas; index as i">
                                   {{espec.nombre}}
                                 </option>

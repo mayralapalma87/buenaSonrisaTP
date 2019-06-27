@@ -15,7 +15,7 @@ export class ModalNuevoTurnoComponent implements OnInit {
   }
 
   @ViewChild('btnClose') btnClose: ElementRef;
-  @Input() userUid: string;
+  @Input() userId: string;
   public especialistas: Especialistas[];
   public especialista = '';
   public especialidades: Especialidad[];
@@ -39,6 +39,7 @@ export class ModalNuevoTurnoComponent implements OnInit {
   }
   onSaveTurno(turnoForm: NgForm): void {
     this.turno = turnoForm.value;
+    this.turno.userId = this.userId;
     this.turno.estado = 'reservado';
     if (turnoForm.value.id == null) {
       // New
