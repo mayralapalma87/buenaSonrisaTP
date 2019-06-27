@@ -4,13 +4,13 @@ import { Especialistas } from './especialistas';
 export interface turnoInteface {
   id?: any;
   cliente?: any;
+  clienteId?: any;
   user?: any;
   especialidad?: any;
   especialista?: any;
   encuesta?: any;
   estado?: string;
   fecha_hora?: any;
-  dia_turno?: any;
   hora_turno?: any;
   resena_especialista?: string;
 }

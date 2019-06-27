@@ -26,7 +26,7 @@
                             <label for="especialista">Especialista:</label>
                             <select name="especialista" class="form-control" [(ngModel)]="this.dataApi.selectedTurno.especialista">
                                 <option *ngFor="let espec of especialistas">
-                                  {{espec.matricula}}
+                                  {{espec.nombre}}
                                 </option>
                             </select>
                         </div>

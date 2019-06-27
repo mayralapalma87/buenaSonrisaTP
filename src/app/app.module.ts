@@ -26,8 +26,8 @@ import { HomeComponent } from './home/home.component';
 import { ModalNuevoTurnoComponent } from './modalNuevoTurno/modalNuevoTurno.component';
 import { environment } from 'src/environments/environment';
 import { EncuestaComponent } from './encuesta/encuesta.component';
-import { ResenaTurnoComponent } from './resenaTurno/resenaTurno.component';
 import { ModalResenaTurnoComponent } from './modalResenaTurno/modalResenaTurno.component';
+import { ModalHistorialComponent } from './modalHistorial/modalHistorial.component';
 
 
 @NgModule({
@@ -45,8 +45,8 @@ import { ModalResenaTurnoComponent } from './modalResenaTurno/modalResenaTurno.c
       HomeComponent,
       ModalNuevoTurnoComponent,
       EncuestaComponent,
-      ResenaTurnoComponent,
-      ModalResenaTurnoComponent
+      ModalResenaTurnoComponent,
+      ModalHistorialComponent
    ],
    imports: [
       BrowserModule,

@@ -12,33 +12,37 @@
             <tr>
                 <th scope="col">Cod. Reserva</th>
                 <th scope="col">Especialidad</th>
-                <th scope="col">Especialista</th>
+                <th scope="col">Paciente</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Estado</th>
-                <th scope="col"><button class="btn btn-success" data-toggle="modal" data-target="#modalNuevoTurno">Nuevo Turno</button></th>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">&nbsp;</th>
                 <!-- <th scope="col">Foto</th> -->
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let turno of turnos; index as i">
-                <th scope="row">{{i+1}}</th>
-                <td>{{turno.especialidad}}</td>
-                <td>{{turno.especialista}}</td>
-                <td>{{turno.fecha_hora | date}}</td>
-                <td>{{turno.estado}}</td>
-                <!--  <td class="thmb">
+            <ng-container *ngFor="let turno of turnos; index as i">
+                <tr *ngIf="evaluarFecha(turno)">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{turno.especialidad}}</td>
+                    <td>{{turno.cliente}}</td>
+                    <td>{{turno.fecha_hora | date}}</td>
+                    <td>{{turno.estado}}</td>
+                    <!--  <td class="thmb">
                     <img [src]='"../../assets/img"+p.foto' class="img-fluid img-thumbnail">
                 </td>-->
-                <td>
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#modalResenaTurno" (click)="modificarTurno(turno)">Reseña de atencion</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" (click)="cancelarTurno(turno.id)">Cancelar</button>
-                </td>
-            </tr>
+                    <td>
+                        <button class="btn btn-block btn-warning" data-toggle="modal" data-target="#modalResenaTurno" (click)="modificarTurno(turno)">Reseña de atencion</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-block btn-danger" *ngIf='turno.estado == "reservado"; else botonDisable' id="buttonCancel" name="buttonCancel" (click)="cancelarTurno(turno.id)">Registrar Ausencia</button>
+                        <ng-template #botonDisable>
+                            <button id="buttonCancel" disabled=true name="buttonCancel" class="btn btn-block btn-secondary">Registrar Ausencia</button>
+                        </ng-template>
+                    </td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
 </div>
-<app-modalNuevoTurno></app-modalNuevoTurno>
+<app-modalResenaTurno></app-modalResenaTurno>

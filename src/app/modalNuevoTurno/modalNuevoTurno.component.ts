@@ -43,15 +43,13 @@ export class ModalNuevoTurnoComponent implements OnInit {
     if (turnoForm.value.id == null) {
       // New
       this.turno = turnoForm.value;
-      this.turno.fecha_hora = new Date(turnoForm.value.fecha_hora); // tslint:disable-next-line: max-line-length
-      this.turno.especialista = typeof(this.turno.especialista) !== 'undefined' && this.turno.especialista !== null ? '/especialista/' + this.turno.especialista.id : null;
-      // tslint:disable-next-line: max-line-length
-      this.turno.especialidad = typeof(this.turno.especialidad) !== 'undefined' && this.turno.especialidad !== null ? '/especialidad/' + this.turno.especialidad.id : null;
+      this.turno.fecha_hora = turnoForm.value.fecha_hora;
       this.turno.estado = 'reservado';
       this.dataApi.agregarTurno(this.turno);
     } else {
       // Update
       this.turno = turnoForm.value;
+      this.turno.fecha_hora = turnoForm.value.fecha_hora;
       this.turno.estado = 'reservado';
       this.dataApi.modificarTurno(this.turno);
     }
