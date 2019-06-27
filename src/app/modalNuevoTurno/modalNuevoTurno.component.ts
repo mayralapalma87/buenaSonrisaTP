@@ -16,6 +16,7 @@ export class ModalNuevoTurnoComponent implements OnInit {
 
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userId: string;
+  @Input() cliente: string;
   public especialistas: Especialistas[];
   public especialista = '';
   public especialidades: Especialidad[];
@@ -41,6 +42,9 @@ export class ModalNuevoTurnoComponent implements OnInit {
     this.turno = turnoForm.value;
     this.turno.userId = this.userId;
     this.turno.estado = 'reservado';
+    if(typeof(this.cliente) !== 'undefined') {
+      this.turno.cliente = this.cliente;
+    }
     if (turnoForm.value.id == null) {
       // New
       this.dataApi.agregarTurno(this.turno);

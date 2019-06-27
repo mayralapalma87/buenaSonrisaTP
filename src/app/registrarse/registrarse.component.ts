@@ -14,15 +14,38 @@ import { UserInterface } from 'src/app/models/user';
 })
 
 export class RegistrarseComponent implements OnInit {
-  user: UserInterface;
+  user: UserInterface = {
+    nombre: '',
+    email: '',
+    foto: '',
+    roles: {}
+  };
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
 
   constructor(private router: Router, private authservice: AuthService, private storage: AngularFireStorage) { }
   @ViewChild('imageUser') inpupImageUser: ElementRef;
-  ngOnInit() {
-  }
+  public isAdmin: any = null;
+  public userId: string = null;
+  public isLogged: boolean = false;
 
+  ngOnInit() {
+    this.getCurrentUser();
+  }
+  getCurrentUser() {
+    this.authservice.isAuth().subscribe(auth => {
+      if (auth) {
+        this.isLogged = true;
+        this.userId = auth.uid;
+        this.authservice.isUserAdmin(this.userId).subscribe(userRole => {
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.user.roles  = userRole.roles;
+      });
+    } else {
+        this.isLogged = false;
+      }
+    });
+  }
   checkedOS(value) {
 // tslint:disable-next-line: no-debugger
     if (value === '2') {
@@ -44,6 +67,7 @@ export class RegistrarseComponent implements OnInit {
     const id = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
     const filePath = `uploads/pofile_${id}`;
+    this.user.foto = filePath;
     const ref = this.storage.ref(filePath);
     const task = this.storage.upload(filePath , file);
     this.uploadPercent = task.percentageChanges();

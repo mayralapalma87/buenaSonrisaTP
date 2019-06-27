@@ -11,18 +11,19 @@ import { ErrorComponent } from './error/error.component';
 import { MenuRecepcionComponent } from './menuRecepcion/menuRecepcion.component';
 import { AgendaEspecialistaComponent } from './agendaEspecialista/agendaEspecialista.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path: '' , component: HomeComponent},
   {path: 'login' , component: LoginComponent},
   {path: 'registrarse' , component: RegistrarseComponent},
-  {path: 'miPerfil', component: MiPerfilComponent},
-  {path: 'misTurnos', component: MisTurnosComponent},
+  {path: 'miPerfil', component: MiPerfilComponent, canActivate: [AuthGuard]},
+  {path: 'misTurnos', component: MisTurnosComponent, canActivate: [AuthGuard]},
   {path: 'navbar' , component: NavbarComponent},
-  {path: 'nuevoTurno' , component: NuevoTurnoComponent},
-  {path: 'menuRecepcion' , component: MenuRecepcionComponent},
-  {path: 'encuesta/:id' , component: EncuestaComponent},
-  {path: 'agenda' , component: AgendaEspecialistaComponent},
+  {path: 'nuevoTurno' , component: NuevoTurnoComponent, canActivate: [AuthGuard]},
+  {path: 'menuRecepcion' , component: MenuRecepcionComponent, canActivate: [AuthGuard]},
+  {path: 'encuesta/:id' , component: EncuestaComponent, canActivate: [AuthGuard]},
+  {path: 'agenda' , component: AgendaEspecialistaComponent, canActivate: [AuthGuard]},
   {path: 'error' , component: ErrorComponent},
   {path: '**' , component: ErrorComponent},
 ];

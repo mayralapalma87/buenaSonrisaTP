@@ -17,6 +17,7 @@
                 <th scope="col"><button class="btn btn-block btn-success" data-toggle="modal" data-target="#modalNuevoTurno">Nuevo Turno</button></th>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">&nbsp;</th>
+                <th scope="col">&nbsp;</th>
                 <!-- <th scope="col">Foto</th> -->
             </tr>
         </thead>
@@ -54,8 +55,17 @@
                         <button id="buttonEncuesta" name="buttonEncuesta" class="btn btn-block btn-secondary" disabled=true>Encuesta de satisfacción</button>
                     </td>
                 </ng-template>
+                <td *ngIf='turno.estado == "realizado"; else resenaDisable'>
+                    <button class="btn btn-block btn-info" data-toggle="modal" data-target="#modalResenaTurno" (click)="modificarTurno(turno)">Reseña del profesional</button>
+                </td>
+                <ng-template #resenaDisable>
+                    <td>
+                        <button id="buttonResena" name="buttonResena" class="btn btn-block btn-secondary" disabled=true>Reseña del profesional</button>
+                    </td>
+                </ng-template>
             </tr>
         </tbody>
     </table>
 </div>
-<app-modalNuevoTurno [userId]="userId"></app-modalNuevoTurno>
+<app-modalNuevoTurno [userId]="userId" [cliente]="cliente"></app-modalNuevoTurno>
+<app-modalResenaTurno></app-modalResenaTurno>

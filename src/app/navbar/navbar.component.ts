@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit {
   public app_name = 'BuenaSonrisa';
 // tslint:disable-next-line: no-inferrable-types
   public isLogged: boolean = false;
+  public isAdmin: any = null;
+  public userId: string = null;
 
   ngOnInit() {
     this.getCurrentUser();
@@ -24,7 +26,11 @@ export class NavbarComponent implements OnInit {
       if (auth) {
         console.log('user logged');
         this.isLogged = true;
-      } else {
+        this.userId = auth.uid;
+        this.auth.isUserAdmin(this.userId).subscribe(userRole => {
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+      });
+    } else {
         console.log('user is NOT logged');
         this.isLogged = false;
       }

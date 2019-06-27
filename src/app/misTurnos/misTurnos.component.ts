@@ -19,7 +19,7 @@ export class MisTurnosComponent implements OnInit {
   public turno = '';
   public isAdmin: any = null;
   public userId: string = null;
-
+  public cliente: string = null;
 
   ngOnInit() {
     this.getTurnos();
@@ -32,10 +32,10 @@ export class MisTurnosComponent implements OnInit {
         this.userId = auth.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
           this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
-          // this.isAdmin = true;
-        })
+          this.cliente = userRole.email;
+        });
       }
-    })
+    });
   }
   getTurnos() {
     this.dataApi.getTurnos().subscribe( turnos => {

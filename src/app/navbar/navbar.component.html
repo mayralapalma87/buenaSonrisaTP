@@ -10,13 +10,13 @@
         </button>
             </li>
 
-            <li class="nav-item" *ngIf="isLogged">
+            <li class="nav-item" *ngIf="isLogged && isAdmin">
                 <button class="nav-link" routerLink="/menuRecepcion">Menu </button>
             </li>
-            <li class="nav-item" *ngIf="isLogged">
+            <li class="nav-item" *ngIf="isLogged && isAdmin">
                 <button class="nav-link" routerLink="/agenda">Agenda del dia </button>
             </li>
-            <li class="nav-item" *ngIf="isLogged">
+            <li class="nav-item" *ngIf="isLogged && !isAdmin">
                 <button class="nav-link" routerLink="/misTurnos">Mis Turnos </button>
             </li>
             <li class="nav-item" *ngIf="!isLogged">

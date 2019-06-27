@@ -11,7 +11,12 @@ import { Component, OnInit } from '@angular/core';
 export class MiPerfilComponent implements OnInit {
 
 constructor(private authService: AuthService) { }
- user: UserInterface;
+user: UserInterface = {
+  nombre: '',
+  email: '',
+  foto: '',
+  roles: {}
+};
  public providerId: string = 'null';
   ngOnInit() {
     this.authService.isAuth().subscribe(user => {
