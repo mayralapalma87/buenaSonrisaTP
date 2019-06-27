@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { DataApiService } from './../services/data-api.service';
 import { Component, OnInit } from '@angular/core';
 import { turnoInteface } from '../models/turnoInterface';
@@ -12,13 +13,29 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class MisTurnosComponent implements OnInit {
 
-  constructor(private dataApi: DataApiService) { }
+  constructor(private dataApi: DataApiService, private authService:AuthService) { }
   public turnos: turnoInteface[];
   public turnosByUser: turnoInteface[];
   public turno = '';
+  public isAdmin: any = null;
+  public userId: string = null;
+
 
   ngOnInit() {
     this.getTurnos();
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.userId = auth.uid;
+        this.authService.isUserAdmin(this.userId).subscribe(userRole => {
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          // this.isAdmin = true;
+        })
+      }
+    })
   }
   getTurnos() {
     this.dataApi.getTurnos().subscribe( turnos => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataApiService } from './../services/data-api.service';
 import { turnoInteface } from '../models/turnoInterface';
-import { faHollyBerry } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-agendaEspecialista',
@@ -10,17 +10,32 @@ import { faHollyBerry } from '@fortawesome/free-solid-svg-icons';
 })
 export class AgendaEspecialistaComponent implements OnInit {
 
-  constructor(private dataApi: DataApiService) { }
+  constructor(private dataApi: DataApiService, private authService: AuthService) { }
   public turnos: turnoInteface[];
   public turnosByUser: turnoInteface[];
   public turno: '';
-  public turnoCancel: turnoInteface ={};
+  public turnoCancel: turnoInteface = {};
   public hoy = new Date();
-  public hoyText = this.hoy.toDateString(); //getFullYear().toString() + (this.hoy.getMonth() + 1 ).toString() + this.hoy.getDay().toString();
+  public hoyText = this.hoy.toDateString();
+  public isAdmin: any = null;
+  public userId: string = null;
+
 
   ngOnInit() {
     this.getTurnos();
+    this.getCurrentUser();
   }
+  getCurrentUser() {
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.userId = auth.uid;
+        this.authService.isUserAdmin(this.userId).subscribe(userRole => {
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+        });
+      }
+    });
+  }
+
   getTurnos() {
     this.dataApi.getTurnos().subscribe( turnos => {
       this.turnos = turnos;
@@ -29,7 +44,7 @@ export class AgendaEspecialistaComponent implements OnInit {
 
   filterTurnosByUser(user) {
     this.turnos.forEach(function(value) {
-      if (value.cliente == user) {
+      if (value.cliente === user) {
         this.turnosByUser.add(value);
       }
     });
@@ -45,18 +60,16 @@ export class AgendaEspecialistaComponent implements OnInit {
   modificarTurno(turno: turnoInteface) {
     this.dataApi.selectedTurno = Object.assign({}, turno);
   }
-  llenarEncuesta(turnoId){
-
-  }
   public reiniciar() {
     this.turnos = [];
   }
-  evaluarFecha(turno: turnoInteface){debugger;
-    var fechanum;
-    if(typeof(turno.fecha_hora.seconds) !== 'undefined')
-      fechanum = turno.fecha_hora.seconds* 1000;
-    var value = fechanum? new Date(fechanum): new Date(turno.fecha_hora);
-    var turnoFecha = (value).toDateString()//turno.fecha_hora.toString().replace("-","").replace("/","");
-     return (turnoFecha.indexOf(this.hoyText) !== -1);
+  evaluarFecha(turno: turnoInteface) {
+    let fechanum;
+    if (typeof(turno.fecha_hora.seconds) !== 'undefined') {
+      fechanum = turno.fecha_hora.seconds * 1000;
+    }
+    let value = fechanum ? new Date(fechanum) : new Date(turno.fecha_hora);
+    let turnoFecha = (value).toDateString();
+    return (turnoFecha.indexOf(this.hoyText) !== -1);
   }
 }

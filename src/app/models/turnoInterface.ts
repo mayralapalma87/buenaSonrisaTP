@@ -4,8 +4,7 @@ import { Especialistas } from './especialistas';
 export interface turnoInteface {
   id?: any;
   cliente?: any;
-  clienteId?: any;
-  user?: any;
+  userId?: any;
   especialidad?: any;
   especialista?: any;
   encuesta?: any;

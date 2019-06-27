@@ -24,8 +24,8 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="especialista">Especialista:</label>
-                            <select name="especialista" class="form-control" [(ngModel)]="this.dataApi.selectedTurno.especialista">
-                                <option *ngFor="let espec of especialistas">
+                            <select name="especialista" class="form-control" [value]="" [(ngModel)]="this.dataApi.selectedTurno.especialista">
+                                <option *ngFor="let espec of this.especialistas; index as i">
                                   {{espec.nombre}}
                                 </option>
                             </select>

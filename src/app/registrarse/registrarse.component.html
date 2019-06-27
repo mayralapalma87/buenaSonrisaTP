@@ -5,7 +5,7 @@
             <fieldset>
                 <!-- Form Name -->
                 <legend>
-                    <h1>Registrarse</h1>
+                    <h1>Completar Registro</h1>
                 </legend>
                 <div class="row">
                     <div class="col">
@@ -97,7 +97,7 @@
                 </div>
                 <!-- botones finales -->
                 <br>
-                <div class="row">
+                <div class="row" *ngIf="!isLogged">
                     <div class="col">
                         <button type="submit" *ngIf='urlImage | async; else botonDisable' id="buttonRegistry" name="buttonRegistry" class="btn btn-block btn-success">Registrarse con email</button>
                         <ng-template #botonDisable>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" *ngIf="!isLogged">
                     <div class="col">
                         <button class="btn btn-block btn-facebook" *ngIf='urlImage | async; else buttonRegistryFacebook' (click)="onLoginFacebook()" name="buttonRegistryFacebook">
                 <span class="fa fa-facebook"></span>

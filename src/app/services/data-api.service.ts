@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { ChangeDetectorStatus } from '@angular/core/src/change_detection/constants';
 import * as firebase from 'firebase';
 import { Especialidad } from '../models/especialidad';
-import { User } from '../models/user';
+import { UserInterface } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +43,10 @@ export class DataApiService {
   private especialidadDoc: AngularFirestoreDocument<Especialidad>;
   private especialidad: Observable<Especialistas>;
 
-  private listaUser: AngularFirestoreCollection<User>;
-  private Useres: Observable<User[]>;
-  private UserDoc: AngularFirestoreDocument<User>;
-  private User: Observable<Especialistas>;
+  private listaUser: AngularFirestoreCollection<UserInterface>;
+  private users: Observable<UserInterface[]>;
+  private userDoc: AngularFirestoreDocument<UserInterface>;
+  private user: Observable<UserInterface>;
 
 
   getTurnos() {
@@ -120,13 +120,13 @@ export class DataApiService {
       }));
   }
   getUserDataUserbyId(id: string) {
-    this.UserDoc = this.afs.doc<User>(`usuario/${id}`);
-    return this.turno = this.turnoDoc.snapshotChanges()
+    this.userDoc = this.afs.doc<UserInterface>(`users/${id}`);
+    return this.user = this.userDoc.snapshotChanges()
       .pipe(map(action => {
         if (action.payload.exists === false) {
           return null;
         } else {
-          const data = action.payload.data() as User;
+          const data = action.payload.data() as UserInterface;
           data.id = action.payload.id;
           return data;
         }

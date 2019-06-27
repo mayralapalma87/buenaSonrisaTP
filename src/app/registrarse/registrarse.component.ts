@@ -1,10 +1,11 @@
+import { NavbarComponent } from './../navbar/navbar.component';
 import { Component, OnInit, ElementRef , ViewChild} from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { UserInterface } from 'src/app/models/user';
 
 @Component({
   selector: 'app-registrarse',
@@ -13,12 +14,7 @@ import { User } from 'src/app/models/user';
 })
 
 export class RegistrarseComponent implements OnInit {
-  user: User = {
-    nombre: '',
-    apellido: '',
-    telefono: '',
-    foto: ''
-  };
+  user: UserInterface;
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
 

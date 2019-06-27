@@ -1,7 +1,8 @@
-import { User } from 'src/app/models//user';
+import { UserInterface } from 'src/app/models//user';
 
-export class Clientes implements User {
+export class Clientes {
   id?: any;
+  roles: any;
   public nrocredencial: string;
   public obraSocial: string;
 }

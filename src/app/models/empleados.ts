@@ -1,8 +1,8 @@
-import { User } from 'src/app/models//user';
+import { UserInterface } from 'src/app/models//user';
 import { turnoInteface } from './turnoInterface';
 
 
-export class Empleados implements User {
+export class Empleados{
   id?: any;
   public rol: string;
   public idEmpleado: Int32Array;

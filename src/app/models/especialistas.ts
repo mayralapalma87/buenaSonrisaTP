@@ -1,6 +1,6 @@
 import { Empleados } from './empleados';
 
-export class Especialistas extends Empleados {
+export class Especialistas {
   id?: any;
   especialidad?: any;
   diasAtencion?: any;

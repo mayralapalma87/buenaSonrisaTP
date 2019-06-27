@@ -30,32 +30,25 @@ export class ModalNuevoTurnoComponent implements OnInit {
   getEspecialistas() {
     this.dataApi.getEspecialistas().subscribe( especialistas => {
       this.especialistas = especialistas;
-      console.log('especialistas:', this.especialistas);
     });
   }
   getEspecialidades() {
     this.dataApi.getEspecialidades().subscribe( especialidades => {
       this.especialidades = especialidades;
-      console.log('especialidades:', this.especialidades);
     });
   }
   onSaveTurno(turnoForm: NgForm): void {
+    this.turno = turnoForm.value;
+    this.turno.estado = 'reservado';
     if (turnoForm.value.id == null) {
       // New
-      this.turno = turnoForm.value;
-      this.turno.fecha_hora = turnoForm.value.fecha_hora;
-      this.turno.estado = 'reservado';
       this.dataApi.agregarTurno(this.turno);
     } else {
       // Update
-      this.turno = turnoForm.value;
-      this.turno.fecha_hora = turnoForm.value.fecha_hora;
-      this.turno.estado = 'reservado';
       this.dataApi.modificarTurno(this.turno);
     }
     this.turno = null;
     turnoForm.resetForm();
     this.btnClose.nativeElement.click();
   }
-
 }
