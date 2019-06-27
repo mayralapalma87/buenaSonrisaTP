@@ -26,6 +26,8 @@ import { HomeComponent } from './home/home.component';
 import { ModalNuevoTurnoComponent } from './modalNuevoTurno/modalNuevoTurno.component';
 import { environment } from 'src/environments/environment';
 import { EncuestaComponent } from './encuesta/encuesta.component';
+import { ResenaTurnoComponent } from './resenaTurno/resenaTurno.component';
+import { ModalResenaTurnoComponent } from './modalResenaTurno/modalResenaTurno.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
       MiPerfilComponent,
       HomeComponent,
       ModalNuevoTurnoComponent,
-      EncuestaComponent
+      EncuestaComponent,
+      ResenaTurnoComponent,
+      ModalResenaTurnoComponent
    ],
    imports: [
       BrowserModule,
