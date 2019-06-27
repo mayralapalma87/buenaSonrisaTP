@@ -1,0 +1,114 @@
+<body>
+    <br>
+    <br>
+    <br>
+    <!-- Page Content -->
+    <div class="container">
+        <form class="form-horizontal" (ngSubmit)="onFinishReview()">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>
+                    <h1>Encuesta de satisfacción</h1>
+                </legend>
+                <div class="row">
+                    <label class="col-md-10 control-label">Puntaje de la clinica en general</label>
+                    <div class="col-md-10">
+                        <div class="review-block-rate col-md-10">
+                            <button type="button" class="btn btn-outline-warning">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">1</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">2</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">3</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">4</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">5</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true">6</span>
+                              </button>
+                            <button type="button" class="btn btn-outline-warning">
+                                  <span class="glyphicon glyphicon-star" aria-hidden="true">7</span>
+                                </button>
+                            <button type="button" class="btn btn-outline-warning">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true">8</span>
+                                  </button>
+                            <button type="button" class="btn btn-outline-warning">
+                                      <span class="glyphicon glyphicon-star" aria-hidden="true">9</span>
+                                    </button>
+                            <button type="button" class="btn btn-outline-warning">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true">10</span>
+                                      </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-10 control-label">Puntaje de Atencion del profesional</label>
+                    <div class="col-md-10">
+                        <div class="review-block-rate col-md-10">
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">1</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">2</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">3</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">4</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">5</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true">6</span>
+                              </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                                  <span class="glyphicon glyphicon-star" aria-hidden="true">7</span>
+                                </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true">8</span>
+                                  </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                                      <span class="glyphicon glyphicon-star" aria-hidden="true">9</span>
+                                    </button>
+                            <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true">10</span>
+                                      </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-10 control-label">Por favor deje una breve reseña sobre su experiencia en nuestra clinica:</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Deje sus comentarios aqui..." rows="5" [(ngModel)]="encuesta.review"></textarea>
+                    </div>
+                </div>
+
+                <br>
+                <!-- botones finales -->
+                <br>
+                <div class="row">
+                    <div class="col-md-5">
+                        <button type="submit" class="btn btn-block btn-success">Enviar</button>
+                    </div>
+                    <div class="col-md-5">
+                        <button id="buttonCancel" name="buttonCancel" routerLink="/misTurnos" class="btn btn-block btn-danger">Cancelar</button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </fieldset>
+        </form>
+    </div>
+</body>

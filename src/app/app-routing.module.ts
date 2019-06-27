@@ -8,6 +8,9 @@ import { MisTurnosComponent } from './misTurnos/misTurnos.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NuevoTurnoComponent } from './nuevoTurno/nuevoTurno.component';
 import { ErrorComponent } from './error/error.component';
+import { MenuRecepcionComponent } from './menuRecepcion/menuRecepcion.component';
+import { AgendaEspecialistaComponent } from './agendaEspecialista/agendaEspecialista.component';
+import { EncuestaComponent } from './encuesta/encuesta.component';
 
 const routes: Routes = [
   {path: '' , component: HomeComponent},
@@ -17,6 +20,9 @@ const routes: Routes = [
   {path: 'misTurnos', component: MisTurnosComponent},
   {path: 'navbar' , component: NavbarComponent},
   {path: 'nuevoTurno' , component: NuevoTurnoComponent},
+  {path: 'menuRecepcion' , component: MenuRecepcionComponent},
+  {path: 'encuesta/:id' , component: EncuestaComponent},
+  {path: 'agenda' , component: AgendaEspecialistaComponent},
   {path: 'error' , component: ErrorComponent},
   {path: '**' , component: ErrorComponent},
 ];

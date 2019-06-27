@@ -9,8 +9,12 @@
                 <button class="nav-link" routerLink="/registrarse">Registrarse
         </button>
             </li>
+
             <li class="nav-item" *ngIf="isLogged">
-                <button class="nav-link" routerLink="/miPerfil">Perfil </button>
+                <button class="nav-link" routerLink="/menuRecepcion">Menu </button>
+            </li>
+            <li class="nav-item" *ngIf="isLogged">
+                <button class="nav-link" routerLink="/agenda">Agenda del dia </button>
             </li>
             <li class="nav-item" *ngIf="isLogged">
                 <button class="nav-link" routerLink="/misTurnos">Mis Turnos </button>
@@ -18,6 +22,9 @@
             <li class="nav-item" *ngIf="!isLogged">
                 <button class="nav-link" routerLink="/login">Ingresar
          </button>
+            </li>
+            <li class="nav-item" *ngIf="isLogged">
+                <button class="nav-link" routerLink="/miPerfil">Perfil </button>
             </li>
             <li class="nav-item" *ngIf="isLogged">
                 <a href="#" class="nav-link" (click)="onLogout()">Salir

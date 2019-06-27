@@ -1,0 +1,11 @@
+body {
+    background-image: url('src/assets/review-back.jpg');
+    background-position: right;
+    background-size: 100% 100%;
+    font: normal 24px Roboto, arial, sans-serif;
+    font-family: 'Dancing Script', cursive!important;
+}
+
+.btn {
+    margin: 5x;
+}

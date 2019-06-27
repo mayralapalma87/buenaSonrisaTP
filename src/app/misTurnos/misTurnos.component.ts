@@ -2,6 +2,7 @@ import { DataApiService } from './../services/data-api.service';
 import { Component, OnInit } from '@angular/core';
 import { turnoInteface } from '../models/turnoInterface';
 import { NgForm } from '@angular/forms';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
 // tslint:disable-next-line: component-selector
@@ -13,6 +14,7 @@ export class MisTurnosComponent implements OnInit {
 
   constructor(private dataApi: DataApiService) { }
   public turnos: turnoInteface[];
+  public turnosByUser: turnoInteface[];
   public turno = '';
 
   ngOnInit() {
@@ -21,6 +23,14 @@ export class MisTurnosComponent implements OnInit {
   getTurnos() {
     this.dataApi.getTurnos().subscribe( turnos => {
       this.turnos = turnos;
+    });
+  }
+
+  filterTurnosByUser(user) {
+    this.turnos.forEach(function(value) {
+      if (value.cliente == user) {
+        this.turnosByUser.add(value);
+      }
     });
   }
   cancelarTurno(idTurno: string) {
@@ -32,7 +42,9 @@ export class MisTurnosComponent implements OnInit {
   modificarTurno(turno: turnoInteface) {
     this.dataApi.selectedTurno = Object.assign({}, turno);
   }
+  llenarEncuesta(turnoId){
 
+  }
   public reiniciar() {
     this.turnos = [];
   }

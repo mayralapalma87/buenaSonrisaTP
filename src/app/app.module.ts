@@ -25,37 +25,41 @@ import { MiPerfilComponent } from './miPerfil/miPerfil.component';
 import { HomeComponent } from './home/home.component';
 import { ModalNuevoTurnoComponent } from './modalNuevoTurno/modalNuevoTurno.component';
 import { environment } from 'src/environments/environment';
+import { EncuestaComponent } from './encuesta/encuesta.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    ErrorComponent,
-    RegistrarseComponent,
-    NuevoTurnoComponent,
-    AgendaEspecialistaComponent,
-    MenuRecepcionComponent,
-    NavbarComponent,
-    MisTurnosComponent,
-    MiPerfilComponent,
-    HomeComponent,
-    ModalNuevoTurnoComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
-  ],
-  providers: [
-    AngularFireAuth,
-    AngularFirestore
-  ],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      LoginComponent,
+      ErrorComponent,
+      RegistrarseComponent,
+      NuevoTurnoComponent,
+      AgendaEspecialistaComponent,
+      MenuRecepcionComponent,
+      NavbarComponent,
+      MisTurnosComponent,
+      MiPerfilComponent,
+      HomeComponent,
+      ModalNuevoTurnoComponent,
+      EncuestaComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      HttpClientModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireDatabaseModule,
+      AngularFireStorageModule
+   ],
+   providers: [
+      AngularFireAuth,
+      AngularFirestore
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule {
 }
