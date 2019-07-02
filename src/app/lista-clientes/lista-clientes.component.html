@@ -1,0 +1,46 @@
+<br>
+<!--
+<div class="pd">
+   <app-busqueda [listaClientes]="Clientes" (filtro)="mostrarDatos($event)"></app-busqueda>
+</div> -->
+<br>
+<br>
+<div class="table-responsive-md">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Cod. Reserva</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Especialista</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Estado</th>
+                <th scope="col"><button class="btn btn-block btn-success" data-toggle="modal" data-target="#modalNuevoCliente">Nuevo Cliente</button></th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Cliente of Clientes; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td *ngIf="Cliente.userId == userId || isAdmin == true; else noOwner">
+                    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#modalNuevoCliente" (click)="modificarCliente(Cliente)">Modificar</button>
+                </td>
+                <ng-template #noOwner>
+                    <td>
+                        <button class="btn btn-secondary" disabled="true">Modificar</button>
+                    </td>
+                </ng-template>
+                <td *ngIf="isAdmin == true; else noAdmin">
+                    <button class="btn btn-block btn-danger" (click)="cancelarCliente(Cliente.id)">Cancelar</button>
+                </td>
+                <ng-template #noAdmin>
+                    <td>
+                        <button class="btn btn-danger" disabled="true">Cancelar</button>
+                    </td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<app-modalNuevoCliente [userId]="userId"></app-modalNuevoCliente>

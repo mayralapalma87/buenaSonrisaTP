@@ -9,12 +9,14 @@ import { ChangeDetectorStatus } from '@angular/core/src/change_detection/constan
 import * as firebase from 'firebase';
 import { Especialidad } from '../models/especialidad';
 import { UserInterface } from '../models/user';
+import { ClienteInterface } from '../models/ClienteInterface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataApiService {
 
+  selectedCliente: ClienteInterface;
   // tslint:disable-next-line: max-line-length
   constructor(private afs: AngularFirestore) {
     this.listaTurnos = afs.collection<turnoInteface>('turnos');
@@ -48,7 +50,33 @@ export class DataApiService {
   private userDoc: AngularFirestoreDocument<UserInterface>;
   private user: Observable<UserInterface>;
 
+  private listaClientes: AngularFirestoreCollection<ClienteInterface>;
+  private clientes: Observable<ClienteInterface[]>;
+  private clienteDoc: AngularFirestoreDocument<ClienteInterface>;
+  private cliente: Observable<ClienteInterface>;
 
+  borrarCliente(idCliente: string) {
+    this.clienteDoc = this.afs.doc<ClienteInterface>(`clientes/${idCliente}`);
+    this.clienteDoc.delete();
+  }
+  getClientes() {
+    return this.clientes = this.listaClientes.snapshotChanges()
+    .pipe(map(changes => {
+      return changes.map(action => {
+        const data = action.payload.doc.data() as ClienteInterface;
+        data.id = action.payload.doc.id;
+        return data;
+      });
+    }));
+  }
+  modificarCliente(cliente: ClienteInterface) {
+    const idCliente = cliente.id;
+    this.clienteDoc = this.afs.doc<ClienteInterface>(`clientes/${idCliente}`);
+    this.clienteDoc.update(cliente);
+  }
+  agregarCliente(cliente: ClienteInterface) {
+    this.listaClientes.add(cliente);
+  }
   getTurnos() {
     return this.turnos = this.listaTurnos.snapshotChanges()
       .pipe(map(changes => {

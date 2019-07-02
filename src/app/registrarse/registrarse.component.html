@@ -45,13 +45,21 @@
                         </div>
                     </div>
                     <div class="col">
-                        <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
-                        <select class="custom-select col-md-10" id="inlineFormCustomSelect" [value]='1' disabled='true' (change)="tipoUserChanged($event.target.value)">
-                          <option selected>Seleccionar...</option>
-                          <option value="1">Paciente</option>
-                          <option value="2">Especialista</option>
-                          <option value="3">Recepcionista</option>
-                        </select>
+                        <div *ngIf="isAdmin == true; else noAdmin">
+                            <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
+                            <select class="custom-select col-md-10" id="inlineFormCustomSelect" (change)="tipoUserChanged($event.target.value)">
+                              <option selected>Seleccionar...</option>
+                              <option value="Recepcionista">Recepcionista</option>
+                              <option value="Especialista">Especialista</option>
+                            </select>
+                        </div>
+                        <ng-template #noAdmin>
+                            <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
+                            <select class="custom-select col-md-10" id="inlineFormCustomSelect" disabled='true' (change)="tipoUserChanged($event.target.value)">
+                              <option selected value="Paciente">Paciente</option>
+                            </select>
+                        </ng-template>
+
                         <!-- Multiple Checkboxes -->
                         <div class="form-group" id="esPaciente">
                             <div class="form-check">

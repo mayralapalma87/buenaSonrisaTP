@@ -9,3 +9,14 @@ a {
     font: normal 20px Roboto, arial, sans-serif;
     font-family: 'Dancing Script', cursive!important;
 }
+
+img {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+label {
+    font-family: 'Dancing Script', cursive!important;
+    color: white;
+}

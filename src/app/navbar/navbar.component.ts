@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../../app/services/auth.service';
+import { UserInterface } from '../models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,13 @@ export class NavbarComponent implements OnInit {
   public isLogged: boolean = false;
   public isAdmin: any = null;
   public userId: string = null;
-
+  user: UserInterface = {
+    id: '',
+    nombre: '',
+    email: '',
+    foto: '',
+    roles: {}
+  };
   ngOnInit() {
     this.getCurrentUser();
   }
@@ -24,14 +31,16 @@ export class NavbarComponent implements OnInit {
   getCurrentUser() {
     this.auth.isAuth().subscribe(auth => {
       if (auth) {
-        console.log('user logged');
         this.isLogged = true;
         this.userId = auth.uid;
+        this.user.nombre = auth.displayName;
+        this.user.email = auth.email;
+        this.user.foto = auth.photoURL;
         this.auth.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');debugger;
+          this.user.roles  = userRole.roles;
       });
     } else {
-        console.log('user is NOT logged');
         this.isLogged = false;
       }
     });

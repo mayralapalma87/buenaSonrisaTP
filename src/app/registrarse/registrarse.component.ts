@@ -38,7 +38,7 @@ export class RegistrarseComponent implements OnInit {
         this.isLogged = true;
         this.userId = auth.uid;
         this.authservice.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');debugger;
           this.user.roles  = userRole.roles;
       });
     } else {

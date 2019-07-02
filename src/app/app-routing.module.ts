@@ -1,3 +1,5 @@
+import { ListaEspecialistasComponent } from './lista-especialistas/lista-especialistas.component';
+import { ListaClientesComponent } from './lista-clientes/lista-clientes.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -24,6 +26,8 @@ const routes: Routes = [
   {path: 'menuRecepcion' , component: MenuRecepcionComponent, canActivate: [AuthGuard]},
   {path: 'encuesta/:id' , component: EncuestaComponent, canActivate: [AuthGuard]},
   {path: 'agenda' , component: AgendaEspecialistaComponent, canActivate: [AuthGuard]},
+  {path: 'lista-especialistas' , component: ListaEspecialistasComponent, canActivate: [AuthGuard]},
+  {path: 'lista-clientes' , component: ListaClientesComponent, canActivate: [AuthGuard]},
   {path: 'error' , component: ErrorComponent},
   {path: '**' , component: ErrorComponent},
 ];
