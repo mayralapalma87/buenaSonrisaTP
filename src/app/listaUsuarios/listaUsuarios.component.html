@@ -1,0 +1,60 @@
+<br>
+<br>
+<br>
+<br>
+<div class="pd" *ngIf="isAdmin">
+    <app-busqueda [listaUsers]="this.usuariosModal" (filtro)="this.mostrarDatos($event)"></app-busqueda>
+</div>
+<br>
+<br>
+<h5 class="modal-title" id="modalNuevoUsuarioLabel">
+    Lista de {{this.filter}}
+</h5>
+<div class="table-responsive-md">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Cod.</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Rol</th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col"><button class="btn btn-block btn-success" data-toggle="modal" data-target="#modalNuevoUsuario">Nuevo Usuario</button></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let usuario of usuarios; index as i">
+                <tr *ngIf="(usuario.roles.especialista == true && filter == 'especialista') || (usuario.roles.cliente == true && filter == 'cliente')">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellido}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.telefono}}</td>
+                    <td *ngIf="usuario.roles.admin == true">Admin</td>
+                    <td *ngIf="usuario.roles.especialista == true">Especialista</td>
+                    <td *ngIf="usuario.roles.cliente == true">Cliente</td>
+                    <td *ngIf="isAdmin == true; else noOwner">
+                        <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#modalNuevoUsuario" (click)="modificarUsuario(usuario)">Modificar</button>
+                    </td>
+                    <ng-template #noOwner>
+                        <td>
+                            <button class="btn btn-secondary" disabled="true">Modificar</button>
+                        </td>
+                    </ng-template>
+                    <td *ngIf="isAdmin == true; else noAdmin">
+                        <button class="btn btn-block btn-danger" (click)="cancelarUsuario(usuario.id)">Cancelar</button>
+                    </td>
+                    <ng-template #noAdmin>
+                        <td>
+                            <button class="btn btn-danger" disabled="true">Cancelar</button>
+                        </td>
+                    </ng-template>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+<app-modalNuevoUsuario [userId]="userId"></app-modalNuevoUsuario>

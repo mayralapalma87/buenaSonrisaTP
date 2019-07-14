@@ -13,7 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class MisTurnosComponent implements OnInit {
 
-  constructor(private dataApi: DataApiService, private authService:AuthService) { }
+  constructor(private dataApi: DataApiService, private authService: AuthService) { }
   public turnos: turnoInteface[];
   public turnosByUser: turnoInteface[];
   public turno = '';
@@ -45,7 +45,7 @@ export class MisTurnosComponent implements OnInit {
 
   filterTurnosByUser(user) {
     this.turnos.forEach(function(value) {
-      if (value.cliente == user) {
+      if (value.cliente === user) {
         this.turnosByUser.add(value);
       }
     });
@@ -58,9 +58,6 @@ export class MisTurnosComponent implements OnInit {
   }
   modificarTurno(turno: turnoInteface) {
     this.dataApi.selectedTurno = Object.assign({}, turno);
-  }
-  llenarEncuesta(turnoId){
-
   }
   public reiniciar() {
     this.turnos = [];

@@ -5,38 +5,31 @@
                 <h5 class="modal-title" id="modalNuevoClienteLabel">
                     {{ !this.dataApi.selectedCliente.id ? 'Nuevo Cliente' : 'Modificar Cliente'}}
                 </h5>
-                <hr>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
             </div>
             <div class="modal-body">
                 <form name="formCliente" #formCliente="ngForm" (ngSubmit)="onSaveCliente(formCliente)">
-                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedCliente.id">
-                    <input type="hidden" name="userUid" [value]="userId">
+                    <!-- type="hidden" -->
+                    <input name="id" [(ngModel)]="this.dataApi.selectedCliente.id">
                     <div class="row">
                         <div class="col">
                             <label class="col-md-10 control-label" for="name">Nombre</label>
-                            <div class="col-md-10">
-                                <input id="name" name="name" type="text" [(ngModel)]="Cliente.nombre" placeholder="" class="form-control input-md">
-                            </div>
+                            <input id="name" name="name" type="text" [(ngModel)]="this.dataApi.selectedCliente.nombre" placeholder="" class="form-control input-md">
                         </div>
                         <div class="col">
                             <label class="col-md-10 control-label" for="surname">Apellido</label>
-                            <div class="col-md-10">
-                                <input id="surname" name="surname" type="text" [(ngModel)]="Cliente.apellido" placeholder="" class="form-control input-md">
-                            </div>
+                            <input id="surname" name="surname" type="text" [(ngModel)]="this.dataApi.selectedCliente.apellido" placeholder="" class="form-control input-md">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <label class="col-md-10 control-label" for="email">E-mail</label>
-                            <div class="col-md-10">
-                                <input id="email" name="email" [(ngModel)]="Cliente.email" type="text" placeholder="" class="form-control input-md">
-                            </div>
+                            <input id="email" name="email" [(ngModel)]="this.dataApi.selectedCliente.email" type="text" placeholder="" class="form-control input-md">
                         </div>
                         <div class="col">
                             <label class="col-md-10 control-label" for="telefono">Numero de Telefono</label>
-                            <div class="col-md-10">
-                                <input id="telefono" name="telefono" type="text" [(ngModel)]="Cliente.telefono" placeholder="" class="form-control input-md">
-                            </div>
+                            <input id="telefono" name="telefono" type="text" [(ngModel)]="this.dataApi.selectedCliente.telefono" placeholder="" class="form-control input-md">
                         </div>
                     </div>
                     <br>
@@ -44,11 +37,11 @@
                         <div class="col">
                             <div class="form-group" id="esPaciente">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipoPaciente" id="tipoPaciente1" value="Particular" [(ngModel)]="Cliente.tipoPaciente">
+                                    <input class="form-check-input" type="radio" name="tipoPaciente" id="tipoPaciente1" value="Particular" [(ngModel)]="this.dataApi.selectedCliente.tipoPaciente">
                                     <label class="form-check-label" for="tipoPaciente1">Particular</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipoPaciente" id="tipoPaciente2" value="ObraSocial" [(ngModel)]="Cliente.tipoPaciente">
+                                    <input class="form-check-input" type="radio" name="tipoPaciente" id="tipoPaciente2" value="ObraSocial" [(ngModel)]="this.dataApi.selectedCliente.tipoPaciente">
                                     <label class="form-check-label" for="tipoPaciente2">Por Obra Social</label>
                                 </div>
                             </div>
@@ -58,15 +51,11 @@
                     <div class="row" id="obraSocialGroupDiv">
                         <div class="col">
                             <label class="col-md-10 control-label" for="obrasocial">Obra social</label>
-                            <div class="col-md-10">
-                                <input id="obrasocial" name="obrasocial" type="text" placeholder="" class="form-control input-md">
-                            </div>
+                            <input id="obrasocial" name="obrasocial" type="text" placeholder="" class="form-control input-md" [(ngModel)]="this.dataApi.selectedCliente.obraSocial">
                         </div>
                         <div class="col">
                             <label class="col-md-10 control-label" for="credencial">Nro. de credencial</label>
-                            <div class="col-md-10">
-                                <input id="credencial" name="credencial" type="text" placeholder="" class="form-control input-md">
-                            </div>
+                            <input id="credencial" name="credencial" type="text" placeholder="" class="form-control input-md" [(ngModel)]="this.dataApi.selectedCliente.nroCarnet">
                         </div>
                     </div>
                     <br>

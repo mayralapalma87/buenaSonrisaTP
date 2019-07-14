@@ -6,4 +6,6 @@ export interface ClienteInterface {
   telefono?: string;
   tipoPaciente?: any;
   email?: string;
+  obraSocial?: any;
+  nroCarnet?: any;
 }

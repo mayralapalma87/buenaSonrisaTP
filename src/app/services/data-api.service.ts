@@ -10,13 +10,12 @@ import * as firebase from 'firebase';
 import { Especialidad } from '../models/especialidad';
 import { UserInterface } from '../models/user';
 import { ClienteInterface } from '../models/ClienteInterface';
+import { EncuestaInterface } from '../models/encuesta';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataApiService {
-
-  selectedCliente: ClienteInterface;
   // tslint:disable-next-line: max-line-length
   constructor(private afs: AngularFirestore) {
     this.listaTurnos = afs.collection<turnoInteface>('turnos');
@@ -25,6 +24,12 @@ export class DataApiService {
     this.especialistas = this.listaEspecialistas.valueChanges();
     this.listaEspecialidad = afs.collection<Especialistas>('especialidad');
     this.especialidades = this.listaEspecialistas.valueChanges();
+    this.listaClientes = afs.collection<ClienteInterface>('cliente');
+    this.clientes = this.listaClientes.valueChanges();
+    this.listaEncuestas = afs.collection<EncuestaInterface>('encuestas');
+    this.encuestas = this.listaEncuestas.valueChanges();
+    this.listaUsers = afs.collection<UserInterface>('users');
+    this.users = this.listaUsers.valueChanges();
   }
 
   private listaTurnos: AngularFirestoreCollection<turnoInteface>;
@@ -45,20 +50,35 @@ export class DataApiService {
   private especialidadDoc: AngularFirestoreDocument<Especialidad>;
   private especialidad: Observable<Especialistas>;
 
-  private listaUser: AngularFirestoreCollection<UserInterface>;
+  private listaUsers: AngularFirestoreCollection<UserInterface>;
   private users: Observable<UserInterface[]>;
   private userDoc: AngularFirestoreDocument<UserInterface>;
   private user: Observable<UserInterface>;
+  public selectedUser: UserInterface = {
+    id: null,
+    roles: {
+      cliente: false,
+      especialista: false,
+      admin: false
+    }
+  };
 
   private listaClientes: AngularFirestoreCollection<ClienteInterface>;
   private clientes: Observable<ClienteInterface[]>;
   private clienteDoc: AngularFirestoreDocument<ClienteInterface>;
   private cliente: Observable<ClienteInterface>;
+  public selectedCliente: ClienteInterface = {
+    id: null
+  };
 
-  borrarCliente(idCliente: string) {
-    this.clienteDoc = this.afs.doc<ClienteInterface>(`clientes/${idCliente}`);
-    this.clienteDoc.delete();
-  }
+  private listaEncuestas: AngularFirestoreCollection<EncuestaInterface>;
+  private encuestas: Observable<EncuestaInterface[]>;
+  private encuestaDoc: AngularFirestoreDocument<EncuestaInterface>;
+  private encuesta: Observable<EncuestaInterface>;
+  public selectedEncuesta: EncuestaInterface = {
+    id: null
+  };
+
   getClientes() {
     return this.clientes = this.listaClientes.snapshotChanges()
     .pipe(map(changes => {
@@ -71,12 +91,40 @@ export class DataApiService {
   }
   modificarCliente(cliente: ClienteInterface) {
     const idCliente = cliente.id;
-    this.clienteDoc = this.afs.doc<ClienteInterface>(`clientes/${idCliente}`);
+    this.clienteDoc = this.afs.doc<ClienteInterface>(`cliente/${idCliente}`);
     this.clienteDoc.update(cliente);
   }
   agregarCliente(cliente: ClienteInterface) {
     this.listaClientes.add(cliente);
   }
+  borrarCliente(idCliente: string) {
+    this.clienteDoc = this.afs.doc<ClienteInterface>(`cliente/${idCliente}`);
+    this.clienteDoc.delete();
+  }
+
+  getEncuesta() {
+    return this.encuestas = this.listaEncuestas.snapshotChanges()
+    .pipe(map(changes => {
+      return changes.map(action => {
+        const data = action.payload.doc.data() as EncuestaInterface;
+        data.id = action.payload.doc.id;
+        return data;
+      });
+    }));
+  }
+  modificarEncuesta(cliente: EncuestaInterface) {
+    const idEncuesta = cliente.id;
+    this.encuestaDoc = this.afs.doc<EncuestaInterface>(`encuestas/${idEncuesta}`);
+    this.encuestaDoc.update(cliente);
+  }
+  agregarEncuesta(encuesta: EncuestaInterface) {
+    this.listaEncuestas.add(encuesta);
+  }
+  borrarEncuesta(idEncuesta: string) {
+    this.encuestaDoc = this.afs.doc<EncuestaInterface>(`encuestas/${idEncuesta}`);
+    this.encuestaDoc.delete();
+  }
+
   getTurnos() {
     return this.turnos = this.listaTurnos.snapshotChanges()
       .pipe(map(changes => {
@@ -160,7 +208,16 @@ export class DataApiService {
         }
       }));
   }
-
+  getUsers() {
+    return this.users = this.listaUsers.snapshotChanges()
+     .pipe(map(changes => {
+       return changes.map(action => {
+         const data = action.payload.doc.data() as UserInterface;
+         data.id = action.payload.doc.id;
+         return data;
+       });
+     }));
+ }
   agregarTurno(turno: turnoInteface): void {
     this.listaTurnos.add(turno);
   }
@@ -172,6 +229,18 @@ export class DataApiService {
   borrarTurno(idTurno: string) {
     this.turnoDoc = this.afs.doc<turnoInteface>(`turnos/${idTurno}`);
     this.turnoDoc.delete();
+  }
+
+  agregarUsuario(user: UserInterface): void {
+    this.listaTurnos.add(user);
+  }
+  modificarUsuario(user: UserInterface) {
+    this.userDoc = this.afs.doc<UserInterface>(`users/${user.id}`);
+    this.userDoc.update(user);
+  }
+  borrarUsuario(idUser: string) {
+    this.userDoc = this.afs.doc<UserInterface>(`users/${idUser}`);
+    this.userDoc.delete();
   }
 
 }

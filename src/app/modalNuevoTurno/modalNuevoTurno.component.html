@@ -17,16 +17,18 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="especialidad">Especialidad:</label>
-                            <select name="especialidad" class="form-control" placeholder="Seleccione..." [value]=this.especialidades[0] [(ngModel)]="this.dataApi.selectedTurno.especialidad">
-                                <option *ngFor="let especialidad of especialidades">
+                            <select name="especialidad" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedTurno.especialidad">
+                              <option selected>Seleccionar...</option>
+                              <option *ngFor="let especialidad of especialidades">
                                     {{especialidad.descripcion}}
                                   </option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="especialista">Especialista:</label>
-                            <select name="especialista" class="form-control" placeholder="Seleccione..." [value]=this.especialistas[0] [(ngModel)]="this.dataApi.selectedTurno.especialista">
-                                <option *ngFor="let espec of this.especialistas; index as i">
+                            <select name="especialista" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedTurno.especialista">
+                              <option selected>Seleccionar...</option>
+                              <option *ngFor="let espec of this.especialistas; index as i">
                                   {{espec.nombre}}
                                 </option>
                             </select>

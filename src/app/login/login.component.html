@@ -36,6 +36,11 @@
                         <button class="btn btn-block btn-social btn-google" (click)="onLoginGoogle()"><span class="fa fa-google"></span> Google </button>
                         </span>
                     </div>
+                    <div id='error' *ngIf="this.haveError">
+                        <p> Oh no! ah ocurrido un error! </p>
+                        <p> Quizas debas pensar mejor la contraseña intenta nuevamente... </p>
+                        <p> {{this.error}} </p>
+                    </div>
                 </form>
             </div>
             <div class="card-footer">

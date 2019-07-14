@@ -1,0 +1,39 @@
+<form class="form-inline my-2 my-lg-0">
+    <label class="control-label" for="inlineFormCustomSelect">Buscar otros usuarios:</label>
+    <select class="custom-select" id="inlineFormCustomSelect" placeholder='Tipo' ngModel #filtroInput="ngModel" name="filtroInput">
+    <option selected>Buscar...</option>
+      <option value="cliente">Cliente</option>
+      <option value="especialista">Especialista</option>
+      <option value="admin">Administrador</option>
+    </select>
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="buscar(filtroInput.value)">Buscar</button>
+</form>
+<div class="modal fade" id="modalBusqueda" tabindex="-1" role="dialog" aria-labelledby="modalBusquedaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalBusquedaLabel">Resultado Busqueda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="box">
+                    <div *ngFor="let u of  this.usuariosModal" class="card" style="width: 18rem;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ u.nombre | titlecase }} <br> {{ u.apellido | titlecase }}</h5>
+                            <p class="card-text"><b>E-mail: </b> {{ u.email }}</p>
+                            <p class="card-text"><b>Telefono: </b>{{u.telefono}}</p>
+                            <p class="card-text"><b>Es Admin:</b> {{ u.roles.admin }}</p>
+                            <p class="card-text"><b>Es Especialista:</b> {{ u.roles.especialista }}</p>
+                            <p class="card-text"><b>Es Cliente:</b> {{ u.roles.cliente }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" #btnClose data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

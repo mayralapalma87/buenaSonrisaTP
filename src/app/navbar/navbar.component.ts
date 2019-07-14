@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
         this.user.email = auth.email;
         this.user.foto = auth.photoURL;
         this.auth.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');debugger;
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
           this.user.roles  = userRole.roles;
       });
     } else {

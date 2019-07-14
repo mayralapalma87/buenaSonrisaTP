@@ -1,0 +1,27 @@
+.card {
+    border-color: blue;
+    border-radius: 15px;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    border-color: blue;
+    border-radius: 15px;
+    text-align: justify;
+}
+
+.card-title {
+    background-color: #000080;
+    border-radius: 15px;
+    color: white;
+    padding: 5px;
+}
+
+label {
+    margin: 5px;
+}
+
+button {
+    margin: 5px;
+}

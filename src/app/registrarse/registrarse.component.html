@@ -7,85 +7,51 @@
                 <legend>
                     <h1>Completar Registro</h1>
                 </legend>
-                <div class="row">
-                    <div class="col">
-                        <label class="col-md-10 control-label" for="name">Nombre</label>
-                        <div class="col-md-10">
-                            <input id="name" name="name" type="text" [(ngModel)]="user.nombre" placeholder="" class="form-control input-md">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <label class="col-md-10 control-label" for="surname">Apellido</label>
-                        <div class="col-md-10">
-                            <input id="surname" name="surname" type="text" [(ngModel)]="user.apellido" placeholder="" class="form-control input-md">
-                        </div>
-                    </div>
-                </div>
-                <br>
+                <!-- <div class="row">
+                  <div class="col">
+                      <label class="col-md-10 control-label" for="name">Nombre</label>
+                      <div class="col-md-10">
+                          <input id="name" name="name" type="text" [(ngModel)]="user.nombre" placeholder="" class="form-control input-md">
+                      </div>
+                  </div>
+                  <div class="col">
+                      <label class="col-md-10 control-label" for="surname">Apellido</label>
+                      <div class="col-md-10">
+                          <input id="surname" name="surname" type="text" [(ngModel)]="user.apellido" placeholder="" class="form-control input-md">
+                      </div>
+                  </div>
+              </div>
+              <br> -->
                 <div class="row">
                     <div class="col">
                         <label class="col-md-10 control-label" for="email">E-mail</label>
                         <div class="col-md-10">
-                            <input id="email" name="email" [(ngModel)]="user.email" type="text" placeholder="" class="form-control input-md">
+                            <input id="email" name="email" [(ngModel)]="this.user.email" type="text" placeholder="" class="form-control input-md">
                         </div>
                     </div>
-                    <div class="col">
-                        <label class="col-md-10 control-label" for="telefono">Numero de Telefono</label>
-                        <div class="col-md-10">
-                            <input id="telefono" name="telefono" type="text" [(ngModel)]="user.telefono" placeholder="" class="form-control input-md">
-                        </div>
-                    </div>
+                    <!--  <div class="col">
+                      <label class="col-md-10 control-label" for="telefono">Numero de Telefono</label>
+                      <div class="col-md-10">
+                          <input id="telefono" name="telefono" type="text" [(ngModel)]="user.telefono" placeholder="" class="form-control input-md">
+                      </div>
+                  </div> -->
                 </div>
                 <br>
                 <div class="row">
                     <div class="col">
                         <label class="col-md-10 control-label" for="password">Contraseña</label>
                         <div class="col-md-10">
-                            <input id="password" name="password" [(ngModel)]="user.clave" type="password" placeholder="" class="form-control input-md">
+                            <input id="password" name="password" [(ngModel)]="this.user.clave" type="password" placeholder="" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col">
-                        <div *ngIf="isAdmin == true; else noAdmin">
-                            <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
-                            <select class="custom-select col-md-10" id="inlineFormCustomSelect" (change)="tipoUserChanged($event.target.value)">
-                              <option selected>Seleccionar...</option>
-                              <option value="Recepcionista">Recepcionista</option>
-                              <option value="Especialista">Especialista</option>
-                            </select>
-                        </div>
-                        <ng-template #noAdmin>
-                            <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
-                            <select class="custom-select col-md-10" id="inlineFormCustomSelect" disabled='true' (change)="tipoUserChanged($event.target.value)">
-                              <option selected value="Paciente">Paciente</option>
-                            </select>
-                        </ng-template>
-
-                        <!-- Multiple Checkboxes -->
-                        <div class="form-group" id="esPaciente">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" (click)="checkedOS($event.target.value)" name="tipoPaciente" id="tipoPaciente1" value="1">
-                                <label class="form-check-label" for="tipoPaciente1">Particular</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" (click)="checkedOS($event.target.value)" name="tipoPaciente" id="tipoPaciente2" value="2">
-                                <label class="form-check-label" for="tipoPaciente2">Por Obra Social</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row" id="obraSocialGroupDiv">
-                    <div class="col">
-                        <label class="col-md-10 control-label" for="obrasocial">Obra social</label>
-                        <div class="col-md-10">
-                            <input id="obrasocial" name="obrasocial" type="text" placeholder="" class="form-control input-md">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <label class="col-md-10 control-label" for="credencial">Nro. de credencial</label>
-                        <div class="col-md-10">
-                            <input id="credencial" name="credencial" type="text" placeholder="" class="form-control input-md">
-                        </div>
+                        <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
+                        <select class="custom-select col-md-10" id="inlineFormCustomSelect" [(ngModel)]="this.selectedRole" (change)="setRole($event.target.value)">
+                        <option selected>Seleccionar...</option>
+                        <option value="1">Cliente</option>
+                        <option value="2">Especilista</option>
+                        <option value="3">Administrador</option>
+                      </select>
                     </div>
                 </div>
                 <br>
@@ -106,38 +72,22 @@
                 <!-- botones finales -->
                 <br>
                 <div class="row">
-                    <div class="col">
-                        <button type="submit" *ngIf='urlImage | async; else botonDisable' id="buttonRegistry" name="buttonRegistry" class="btn btn-block btn-success">Registrarse con email</button>
-                        <ng-template #botonDisable>
-                            <button id="buttonRegistry" disabled=true name="buttonRegistry" class="btn btn-block btn-secondary">Registrarse con email</button>
-                        </ng-template>
+                    <ng-template #Logged>
+                        <td>
+                            <button class="btn btn-danger" disabled="true">Su usuario esta actualmente registrado</button>
+                        </td>
+                    </ng-template>
+                    <div class="col" *ngIf="isLogged == false; else Logged">
+                        <button type="submit" id="buttonRegistry" name="buttonRegistry" class="btn btn-block btn-success">Registrarse con email</button>
                     </div>
                     <div class="col">
-                        <button id="buttonCancel" name="buttonCancel" routerLink="/login" class="btn btn-block btn-danger">Cancelar</button>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-block btn-facebook" *ngIf='urlImage | async; else buttonRegistryFacebook' (click)="onLoginFacebook()" name="buttonRegistryFacebook">
-                <span class="fa fa-facebook"></span>
-                Registrase con Facebook
-              </button>
-                        <ng-template #buttonRegistryFacebook>
-                            <button id="buttonRegistry" disabled=true name="buttonRegistryFacebook" class="btn btn-block btn-facebook"> <span class="fa fa-facebook"></span> Registrase con Facebook</button>
-                        </ng-template>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-block btn-google" *ngIf='urlImage | async; else buttonRegistryGoogle' (click)="onLoginGoogle()" name="buttonRegistryGoogle">
-                <span class="fa fa-google"></span>
-                Registrase con Google
-              </button>
-                        <ng-template #buttonRegistryGoogle>
-                            <button id="buttonRegistry" disabled=true name="buttonRegistryGoogle" class="btn btn-block btn-google"> <span class="fa fa-google"></span> Registrase con Google</button>
-                        </ng-template>
+                        <button id="buttonCancel" name="buttonCancel" routerLink="/" class="btn btn-block btn-danger">Cancelar</button>
                     </div>
                 </div>
-                <br>
+                <div id='error' *ngIf="this.haveError">
+                    <p> Oh no! ah ocurrido un error! </p>
+                    <p> {{this.error}} </p>
+                </div>
             </fieldset>
         </form>
     </div>

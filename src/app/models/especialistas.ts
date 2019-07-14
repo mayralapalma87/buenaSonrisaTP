@@ -1,5 +1,3 @@
-import { Empleados } from './empleados';
-
 export class Especialistas {
   id?: any;
   especialidad?: any;

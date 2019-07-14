@@ -1,38 +1,124 @@
 <div class="container" style="margin-top: 100px;">
-    <section id="profile" class="container">
-        <div class="row mt-5">
-            <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center card">
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12 col-12 profile-header"></div>
-                </div>
+    <div class="row text-center container-fluid">
+        <div class="col">
+            <section id="profile">
                 <div class="row user-details">
                     <div class="col-12">
                         <img src="{{user.foto}}" class="rounded-circle img-thumbnail" alt="profile">
+
+                        <p>
+                            {{user.nombre}}
+                        </p>
+
+                        <p>
+                            {{user.apellido}}
+                        </p>
                         <p>
                             {{user.email}}
                         </p>
-                        <hr> Bienvenido al sistema de Turnos de
-                        <br>
-                        <h1><strong>Buena Sonrisa</strong></h1>
-                        <i>Somos especilistas en salud dental</i>
-                        <hr>
-                        <br>Nuestras instalaciones cuentan con
-                        <br> Siete consultorios
-                        <br> Laboratorio de diagnóstico por imágenes
-                        <br> Laboratorio de mecanica dental
-                        <br> Sala de espera general
-                        <hr>
-                        <br> La clinica esta abierta al público
-                        <br> de lunes a viernes en el horario de 8:00 a 19:00
-                        <br> Sábados en el horario de 8:00 a 14:00
-                        <br>
-                        <br>
-                        <button class="btn btn-primary" routerLink="/registrarse">Completar registro </button>
+                        <p>
+                            {{user.telefono}}
+                        </p>
                         <br>
                         <br>
                     </div>
                 </div>
+            </section>
+        </div>
+        <div class="col-7" id="imageLogin">
+            <!-- Page Content -->
+            <div class="container">
+                <form class="form-horizontal" (ngSubmit)="onUpdateUser()">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <legend>
+                            <h1>Actualizar mi informacion</h1>
+                        </legend>
+                        <div class="row text-left">
+                            <div class="col">
+                                <label class="col-md-10 control-label" for="name">Nombre</label>
+                                <div class="col-md-10">
+                                    <input id="name" name="name" type="text" [(ngModel)]="user.nombre" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label class="col-md-10 control-label" for="surname">Apellido</label>
+                                <div class="col-md-10">
+                                    <input id="surname" name="surname" type="text" [(ngModel)]="user.apellido" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row text-left">
+                            <div class="col">
+                                <label class="col-md-10 control-label" for="telefono">Numero de Telefono</label>
+                                <div class="col-md-10">
+                                    <input id="telefono" name="telefono" type="text" [(ngModel)]="user.telefono" placeholder="" class="form-control input-md">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row text-left" *ngIf="user.roles.cliente == true">
+                            <div class="col">
+                                <!-- Multiple Checkboxes -->
+                                <div class="form-group" id="esPaciente" style='margin-left: 15px;'>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tipoPaciente" [(ngModel)]="user.cobertura" value="Particular">
+                                        <label class="form-check-label" for="tipoPaciente1">Particular</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tipoPaciente" [(ngModel)]="user.cobertura" value="Obra Social">
+                                        <label class="form-check-label" for="tipoPaciente2">Por Obra Social</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row  text-left" *ngIf="user.cobertura == 'Obra Social'">
+                            <div class="col">
+                                <label class="col-md-10 control-label" for="obrasocial">Obra social</label>
+                                <div class="col-md-10">
+                                    <input id="obrasocial" name="obrasocial" type="text" placeholder="" class="form-control input-md" [(ngModel)]="user.obraSocial">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label class="col-md-10 control-label" for="credencial">Nro. de credencial</label>
+                                <div class="col-md-10">
+                                    <input id="credencial" name="credencial" type="text" placeholder="" class="form-control input-md" [(ngModel)]="user.nroCarnet">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carga de imagen -->
+                        <div class="form-group text-left">
+                            <label class="col-md-10 control-label" for="file">Cargar Foto de perfil</label>
+                            <div class="file">
+                                <input type="file" class="form-control-file col-md-10" name="file" accept=".png, .jpg" (change)="onUpload($event)" />
+                            </div>
+                            <hr>
+                            <div class='progress'>
+                                <div class='progress-bar progress-bar-striped bg-success' role="progressbar" [style.width]="(uploadPercent | async) + '%'">
+                                </div>
+                            </div>
+                            <br>
+                            <input #imageUser type="hidden" [value]="urlImage | async">
+                        </div>
+                        <!-- botones finales -->
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <button id="buttonRegistry" name="buttonRegistry" class="btn btn-block btn-primary">Actualizar registro</button>
+                            </div>
+                            <div class="col">
+                                <button id="buttonCancel" name="buttonCancel" routerLink="/misTurnos" class="btn btn-block btn-danger">Cancelar</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div id='error' *ngIf="this.haveError">
+                            <p> Oh no! ah ocurrido un error! </p>
+                            <p> {{this.error}} </p>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
-    </section>
-</div>
+    </div>

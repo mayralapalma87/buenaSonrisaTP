@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +32,11 @@ import { ModalHistorialComponent } from './modalHistorial/modalHistorial.compone
 import { ListaEspecialistasComponent } from './lista-especialistas/lista-especialistas.component';
 import { ListaClientesComponent } from './lista-clientes/lista-clientes.component';
 import { ModalNuevoClienteComponent } from './modalNuevoCliente/modalNuevoCliente.component';
-
+import { ModalEncuestaComponent } from './modalEncuesta/modalEncuesta.component';
+import { ListaUsuariosComponent } from './listaUsuarios/listaUsuarios.component';
+import { ModalNuevoUsuarioComponent } from './modalNuevoUsuario/modalNuevoUsuario.component';
+import { ModalBusquedaComponent } from './modalBusqueda/modalBusqueda.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 @NgModule({
    declarations: [
@@ -52,7 +57,12 @@ import { ModalNuevoClienteComponent } from './modalNuevoCliente/modalNuevoClient
       ModalHistorialComponent,
       ListaEspecialistasComponent,
       ListaClientesComponent,
-      ModalNuevoClienteComponent
+      ModalNuevoClienteComponent,
+      ModalEncuestaComponent,
+      ListaUsuariosComponent,
+      ModalNuevoUsuarioComponent,
+      ModalBusquedaComponent,
+      BusquedaComponent
    ],
    imports: [
       BrowserModule,

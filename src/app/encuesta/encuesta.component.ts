@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Encuesta } from '../models/encuesta';
+import { EncuestaInterface } from '../models/encuesta';
 
 @Component({
   selector: 'app-encuesta',
@@ -11,7 +11,8 @@ export class EncuestaComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
 
-  encuesta: Encuesta = {
+  encuesta: EncuestaInterface = {
+    id: '',
     idTurno : '',
     puntajeEspecialista: 0,
     puntajeClinica: 0,

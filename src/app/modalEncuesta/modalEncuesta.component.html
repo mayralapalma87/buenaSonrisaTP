@@ -1,0 +1,127 @@
+<div class="modal fade" id="modalEncuesta" tabindex="-1" role="dialog" aria-labelledby="modalEncuesta" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNuevaEncuestaLabel">
+                    'Encuesta de Satisfacción:'
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" (ngSubmit)="onSaveEncuesta()">
+                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
+                    <input type="hidden" name="userUid" [value]="userUid">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <div class="row">
+                            <label class="col-md-10 control-label">Puntaje de la clinica en general</label>
+
+                            <!-- Multiple Checkboxes -->
+                            <div class="btn-group btn-group-toggle" id="puntajeClinica">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica1" id="puntajeClinica1" value="1">
+                                    <label class="form-check-label" for="puntajeClinica1">1</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica2" id="puntajeClinica2" value="2">
+                                    <label class="form-check-label" for="puntajeClinica2">2</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica3" id="puntajeClinica3" value="3">
+                                    <label class="form-check-label" for="puntajeClinica3">3</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica4" id="puntajeClinica4" value="4">
+                                    <label class="form-check-label" for="puntajeClinica4">4</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica5" id="puntajeClinica5" value="5">
+                                    <label class="form-check-label" for="puntajeClinica5">5</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica6" id="puntajeClinica6" value="6">
+                                    <label class="form-check-label" for="puntajeClinica6">6</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica7" id="puntajeClinica7" value="7">
+                                    <label class="form-check-label" for="puntajeClinica7">7</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica8" id="puntajeClinica8" value="8">
+                                    <label class="form-check-label" for="puntajeClinica8">8</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica9" id="puntajeClinica9" value="9">
+                                    <label class="form-check-label" for="puntajeClinica9">9</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica10" id="puntajeClinica10" value="10">
+                                    <label class="form-check-label" for="puntajeClinica10">10</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <label class="col-md-10 control-label">Puntaje de Atencion del profesional</label>
+                            <div class="col-md-10">
+                                <div class="review-block-rate col-md-10">
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="10">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">1</span>
+                            </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="2">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">2</span>
+                            </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="3">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">3</span>
+                            </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="4">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">4</span>
+                            </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="5">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true">5</span>
+                            </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="6">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true">6</span>
+                              </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="7">
+                                  <span class="glyphicon glyphicon-star" aria-hidden="true">7</span>
+                                </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="8">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true">8</span>
+                                  </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="9">
+                                      <span class="glyphicon glyphicon-star" aria-hidden="true">9</span>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="10">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true">10</span>
+                                      </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-10 control-label">Por favor deje una breve reseña sobre su experiencia en nuestra clinica:</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Deje sus comentarios aqui..." rows="5" [(ngModel)]="encuesta.review"></textarea>
+                            </div>
+                        </div>
+
+                        <br>
+                        <!-- botones finales -->
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Salir</button>
+                            <button *ngIf="isAdmin !== true; else noAdminbtn" type="submit" class="btn btn-primary">Guardar Reseña</button>
+                            <ng-template #noAdminbtn>
+                                <button class="btn btn-block btn-secondary" disabled=true>Guardar Reseña</button>
+                            </ng-template>
+                        </div>
+                        <br>
+                        <br>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

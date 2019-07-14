@@ -12,17 +12,22 @@ import { NgZone } from '@angular/core';
 export class LoginComponent implements OnInit {
   email = '';
   pass = '';
+  error = '';
+  haveError = false;
 // tslint:disable-next-line: variable-name
   constructor(private router: Router, private authservice: AuthService, private _ngZone: NgZone) {
     // public usuario : new User{private email: string , private clave: string};
   }
   onLogin() {
-    console.log(this.email);
-    console.log(this.pass);
     this.authservice.onLoginEmailUser(this.email, this.pass)
     .then((res) => {
       this.redirectToPerfil();
-    }).catch();
+    }).catch((error) => {
+      //error
+      this.haveError = true;
+      this.error = error;
+      console.log(error);
+    });
   }
   onLoginFacebook(): void {
     this.authservice.onLoginFacebook()

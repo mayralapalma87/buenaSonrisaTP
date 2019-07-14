@@ -22,11 +22,11 @@ export class ModalNuevoTurnoComponent implements OnInit {
   public especialidades: Especialidad[];
   public especialidad = '';
   public turno: turnoInteface;
+  //public hoy: new Date();
 
   ngOnInit() {
     this.getEspecialistas();
     this.getEspecialidades();
-
   }
   getEspecialistas() {
     this.dataApi.getEspecialistas().subscribe( especialistas => {

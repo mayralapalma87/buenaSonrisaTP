@@ -12,14 +12,10 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./modalResenaTurno.component.css']
 })
 export class ModalResenaTurnoComponent implements OnInit {
-  constructor(public dataApi: DataApiService, private authService:AuthService) {
+  constructor(public dataApi: DataApiService, private authService: AuthService) {
   }
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userUid: string;
-  public especialistas: Especialistas[];
-  public especialista = '';
-  public especialidades: Especialidad[];
-  public especialidad = '';
   public turno: turnoInteface;
   public isAdmin: any = null;
   public userId: string = null;

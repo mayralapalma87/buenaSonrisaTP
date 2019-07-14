@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { UserInterface } from 'src/app/models/user';
+import { UserInterface, Roles } from 'src/app/models/user';
 
 @Component({
   selector: 'app-registrarse',
@@ -18,7 +18,11 @@ export class RegistrarseComponent implements OnInit {
     nombre: '',
     email: '',
     foto: '',
-    roles: {}
+    roles: {
+      cliente: false,
+      especialista: false,
+      admin: false
+    }
   };
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
@@ -27,7 +31,15 @@ export class RegistrarseComponent implements OnInit {
   @ViewChild('imageUser') inpupImageUser: ElementRef;
   public isAdmin: any = null;
   public userId: string = null;
-  public isLogged: boolean = false;
+  public isLogged = false;
+  public selectedRole: any;
+  rol: Roles = {
+    cliente: false,
+    especialista: false,
+    admin: false
+  };
+  error = '';
+  haveError = false;
 
   ngOnInit() {
     this.getCurrentUser();
@@ -38,29 +50,13 @@ export class RegistrarseComponent implements OnInit {
         this.isLogged = true;
         this.userId = auth.uid;
         this.authservice.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');debugger;
+          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
           this.user.roles  = userRole.roles;
       });
     } else {
         this.isLogged = false;
       }
     });
-  }
-  checkedOS(value) {
-// tslint:disable-next-line: no-debugger
-    if (value === '2') {
-      document.getElementById('obraSocialGroupDiv').style.display = 'inherit';
-    } else {
-      document.getElementById('obraSocialGroupDiv').style.display = 'none';
-    }
-  }
-  tipoUserChanged(value) {
-// tslint:disable-next-line: no-debugger
-    if (value === '1') {
-     document.getElementById('esPaciente').style.display = 'inherit';
-    } else {
-      document.getElementById('esPaciente').style.display = 'none';
-    }
   }
   onUpload(e) {
     // console.log('subir', e.target.files[0]);
@@ -73,23 +69,43 @@ export class RegistrarseComponent implements OnInit {
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
   }
+  setRole(value) {
+    if (value === '1') {
+     this.rol.cliente = true;
+    }
+    if (value === '2') {
+      this.rol.especialista = true;
+    }
+    if (value === '3') {
+      this.rol.admin = true;
+     }
+  }
   onAddUser() {
-    this.authservice.onRegisterUser(this.user)
+    this.authservice.onRegisterUser(this.user, this.rol)
     .then((res) => {
       this.authservice.isAuth().subscribe( userService => {
         if (userService) {
+          debugger;
           userService.updateProfile({
             displayName: this.user.nombre + ' ' + this.user.apellido,
             photoURL: this.inpupImageUser.nativeElement.value
           }).then( () => {
             console.log('User updated.');
           }).catch( (error) => {
+             // error
+            this.haveError = true;
+            this.error = error;
             console.log('error', error);
           });
         }
       });
       this.router.navigate(['misTurnos']);
-    }).catch();
+    }).catch((error) => {
+      // error
+      this.haveError = true;
+      this.error = error;
+      console.log(error);
+    });
   }
   onLoginFacebook(): void {
     this.authservice.onLoginFacebook()

@@ -9,22 +9,28 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Cod. Reserva</th>
-                <th scope="col">Especialidad</th>
-                <th scope="col">Especialista</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Estado</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Tipo de Cobertura</th>
+                <th scope="col">Obra social</th>
+                <th scope="col">Nro. Credencial</th>
                 <th scope="col"><button class="btn btn-block btn-success" data-toggle="modal" data-target="#modalNuevoCliente">Nuevo Cliente</button></th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
                 <th scope="col">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let Cliente of Clientes; index as i">
-                <th scope="row">{{i+1}}</th>
-                <td *ngIf="Cliente.userId == userId || isAdmin == true; else noOwner">
-                    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#modalNuevoCliente" (click)="modificarCliente(Cliente)">Modificar</button>
+            <tr *ngFor="let cliente of Clientes; index as i">
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.apellido}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.telefono}}</td>
+                <td>{{cliente.tipoPaciente}}</td>
+                <td>{{cliente.obraSocial}}</td>
+                <td>{{cliente.nroCarnet}}</td>
+                <td *ngIf="isAdmin == true; else noOwner">
+                    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#modalNuevoCliente" (click)="modificarCliente(cliente)">Modificar</button>
                 </td>
                 <ng-template #noOwner>
                     <td>
@@ -32,7 +38,7 @@
                     </td>
                 </ng-template>
                 <td *ngIf="isAdmin == true; else noAdmin">
-                    <button class="btn btn-block btn-danger" (click)="cancelarCliente(Cliente.id)">Cancelar</button>
+                    <button class="btn btn-block btn-danger" (click)="cancelarCliente(cliente.id)">Cancelar</button>
                 </td>
                 <ng-template #noAdmin>
                     <td>
@@ -43,4 +49,4 @@
         </tbody>
     </table>
 </div>
-<app-modalNuevoCliente [userId]="userId"></app-modalNuevoCliente>
+<app-modalNuevoCliente></app-modalNuevoCliente>

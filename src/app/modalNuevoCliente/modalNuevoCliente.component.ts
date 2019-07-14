@@ -2,8 +2,6 @@ import { ClienteInterface } from './../models/ClienteInterface';
 import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataApiService } from '../services/data-api.service';
-import { Especialistas } from '../models/especialistas';
-import { Especialidad } from '../models/especialidad';
 
 @Component({
 // tslint:disable-next-line: component-selector
@@ -14,13 +12,22 @@ import { Especialidad } from '../models/especialidad';
 export class ModalNuevoClienteComponent implements OnInit {
   constructor(public dataApi: DataApiService) {
   }
-
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userId: string;
-  public Cliente: ClienteInterface;
-
+  public Cliente: ClienteInterface = {
+    id: null,
+    userId: null,
+    nombre: '',
+    apellido: '',
+    telefono: '',
+    tipoPaciente: null,
+    email: '',
+    obraSocial: null,
+    nroCarnet: null
+  };
   ngOnInit() {
   }
+
   onSaveCliente(ClienteForm: NgForm): void {
     this.Cliente = ClienteForm.value;
     if (ClienteForm.value.id == null) {
