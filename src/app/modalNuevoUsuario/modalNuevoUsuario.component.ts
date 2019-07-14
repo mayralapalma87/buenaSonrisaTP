@@ -3,6 +3,11 @@ import { DataApiService } from '../services/data-api.service';
 import { turnoInteface } from '../models/turnoInterface';
 import { UserInterface, Roles } from '../models/user';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-modalNuevoUsuario',
@@ -10,18 +15,24 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./modalNuevoUsuario.component.css']
 })
 export class ModalNuevoUsuarioComponent implements OnInit {
-
-  constructor(public dataApi: DataApiService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(public dataApi: DataApiService, private router: Router, private authservice: AuthService, private storage: AngularFireStorage) { }
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userId: string;
-  public usuario: UserInterface;
+  @ViewChild('imageUser') inpupImageUser: ElementRef;
   public usuarios: UserInterface[];
   rol: Roles = {
     cliente: false,
     especialista: false,
     admin: false
   };
+  error = '';
+  haveError = false;
   public selectedRole: any;
+  public isAdmin: any = null;
+  public isLogged = false;
+  uploadPercent: Observable<number>;
+  urlImage: Observable<string>;
   ngOnInit() {
    // this.getUsuarios();
   }
@@ -35,7 +46,6 @@ export class ModalNuevoUsuarioComponent implements OnInit {
      this.rol.cliente = true;
     }
     if (value === '2') {
-      this.rol.admin = true;
       this.rol.especialista = true;
     }
     if (value === '3') {
@@ -43,16 +53,14 @@ export class ModalNuevoUsuarioComponent implements OnInit {
      }
   }
   onSaveUsuario(UsuarioForm: NgForm): void {
-    this.usuario = UsuarioForm.value;
-    this.usuario.id = this.userId;
-    if (UsuarioForm.value.id == null) {
-      // New
-      this.dataApi.agregarUsuario(this.usuario);
+    this.dataApi.selectedUser.roles = this.rol;
+    if (this.dataApi.selectedUser.id == null) {
+      this.dataApi.agregarUsuario(this.dataApi.selectedUser);
     } else {
       // Update
-      this.dataApi.modificarUsuario(this.usuario);
+      this.dataApi.modificarUsuario(this.dataApi.selectedUser);
     }
-    this.usuario = null;
+    this.dataApi.selectedUser = null;
     UsuarioForm.resetForm();
     this.btnClose.nativeElement.click();
   }

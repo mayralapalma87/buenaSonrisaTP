@@ -27,9 +27,6 @@ export class ModalEncuestaComponent implements OnInit {
     puntajeClinica: 0,
     review : ''
   };
-  /* ngOnInit() {
-     this.encuesta.idTurno = this.route.snapshot.params['id'];
-  } */
 
   ngOnInit() {
     this.getCurrentUser();
@@ -48,7 +45,6 @@ export class ModalEncuestaComponent implements OnInit {
   onSaveEncuesta(turnoForm: NgForm): void {
       // Update
     this.turno = turnoForm.value;
-    debugger;
     this.turno.encuesta = this.encuesta;
     this.dataApi.modificarTurno(this.turno);
     this.turno = null;

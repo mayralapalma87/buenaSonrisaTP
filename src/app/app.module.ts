@@ -28,9 +28,6 @@ import { ModalNuevoTurnoComponent } from './modalNuevoTurno/modalNuevoTurno.comp
 import { environment } from 'src/environments/environment';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { ModalResenaTurnoComponent } from './modalResenaTurno/modalResenaTurno.component';
-import { ModalHistorialComponent } from './modalHistorial/modalHistorial.component';
-import { ListaEspecialistasComponent } from './lista-especialistas/lista-especialistas.component';
-import { ListaClientesComponent } from './lista-clientes/lista-clientes.component';
 import { ModalNuevoClienteComponent } from './modalNuevoCliente/modalNuevoCliente.component';
 import { ModalEncuestaComponent } from './modalEncuesta/modalEncuesta.component';
 import { ListaUsuariosComponent } from './listaUsuarios/listaUsuarios.component';
@@ -54,9 +51,6 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
       ModalNuevoTurnoComponent,
       EncuestaComponent,
       ModalResenaTurnoComponent,
-      ModalHistorialComponent,
-      ListaEspecialistasComponent,
-      ListaClientesComponent,
       ModalNuevoClienteComponent,
       ModalEncuestaComponent,
       ListaUsuariosComponent,

@@ -31,8 +31,7 @@ export class MisTurnosComponent implements OnInit {
       if (auth) {
         this.userId = auth.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
-          this.cliente = userRole.email;
+          this.isAdmin = userRole.roles.admin;
         });
       }
     });

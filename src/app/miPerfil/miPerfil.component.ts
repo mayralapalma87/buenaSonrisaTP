@@ -35,13 +35,13 @@ user: UserInterface = {
   }
 };
 public isAdmin: any = null;
-  public userId: string = null;
-  public isLogged = false;
-  public selectedRole: any;
-  error = '';
-  haveError = false;
-  uploadPercent: Observable<number>;
-  urlImage: Observable<string>;
+public userId: string = null;
+public isLogged = false;
+public selectedRole: any;
+error = '';
+haveError = false;
+uploadPercent: Observable<number>;
+urlImage: Observable<string>;
 
  // tslint:disable-next-line: no-inferrable-types
  public providerId: string = 'null';

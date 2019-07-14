@@ -1,3 +1,4 @@
+import { TestBed } from '@angular/core/testing';
 import { UserInterface, Roles } from 'src/app/models/user';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -24,11 +25,11 @@ export class AuthService {
   }
   onLoginFacebook() {
     return this.afsauth.auth.signInWithPopup(new auth.FacebookAuthProvider())
-    .then(credential => this.updateUserData(credential.user , this.role));
+    .then(credential => this.updateUserData(credential.user , null, this.role));
   }
   onLoginGoogle() {
     return this.afsauth.auth.signInWithPopup(new auth.GoogleAuthProvider())
-    .then(credential => this.updateUserData(credential.user, this.role));
+    .then(credential => this.updateUserData(credential.user, null, this.role));
   }
   onLoginEmailUser(email: string, pass: string) {
     // tslint:disable-next-line: no-unused-expression
@@ -45,18 +46,22 @@ export class AuthService {
       this.afsauth.auth.createUserWithEmailAndPassword(user.email, user.clave)
         .then(userData => {
           resolve(userData),
-            this.updateUserData(userData.user, rol);
+            this.updateUserData(userData.user, user, rol);
         }).catch(err => console.log(reject(err)));
     });
   }
- private updateUserData(user, role) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+ private updateUserData(userregistry, userData, role) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${userregistry.uid}`);
     const data: UserInterface = {
-      id: user.uid,
-      email: user.email,
+      id: userregistry.uid,
+      email: userregistry.email,
       roles: role,
-      nombre: user.displayName,
-      telefono: user.phoneNumber
+      nombre: userData != null ? userData.nombre : userregistry.displayName,
+      telefono: userData != null ? userData.telefono : userregistry.phoneNumber,
+      apellido: userData != null ? userData.apellido : '',
+      cobertura: userData != null ? userData.cobertura : '',
+      obraSocial: userData != null ? userData.obraSocial : '',
+      nroCarnet: userData != null ? userData.nroCarnet : '',
     };
     return userRef.set(data, { merge: true })
   }

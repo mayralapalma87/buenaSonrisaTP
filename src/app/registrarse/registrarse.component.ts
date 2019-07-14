@@ -85,9 +85,8 @@ export class RegistrarseComponent implements OnInit {
     .then((res) => {
       this.authservice.isAuth().subscribe( userService => {
         if (userService) {
-          debugger;
           userService.updateProfile({
-            displayName: this.user.nombre + ' ' + this.user.apellido,
+            displayName: this.user.nombre,
             photoURL: this.inpupImageUser.nativeElement.value
           }).then( () => {
             console.log('User updated.');

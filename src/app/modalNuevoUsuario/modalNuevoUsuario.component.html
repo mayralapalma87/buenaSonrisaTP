@@ -11,9 +11,8 @@
             </div>
             <div class="modal-body">
                 <form name="formUsuario" #formUsuario="ngForm" (ngSubmit)="onSaveUsuario(formUsuario)">
-                    <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedUser.id">
-                    <input type="hidden" name="userUid" [value]="userId">
-
+                    <input name="id" [(ngModel)]="this.dataApi.selectedUser.id">
+                    <input name="userUid" [value]="userId">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label" for="nombre">Nombre:</label>
@@ -35,22 +34,59 @@
                                 <input id="email" name="email" [(ngModel)]="this.dataApi.selectedUser.email" type="text" placeholder="" class="form-control input-md">
                             </div>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-10 control-label" for="telefono">Numero de Telefono</label>
+                            <input id="telefono" name="telefono" type="text" [(ngModel)]="this.dataApi.selectedUser.telefono" placeholder="" class="form-control input-md">
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
-                            <select class="custom-select" id="inlineFormCustomSelect" [value]="this.selectedRole" [(ngModel)]="this.selectedRole" (change)="setRole($event.target.value)">
+                            <select class="custom-select" id="inlineFormCustomSelect" [(ngModel)]="this.selectedRole" (change)="setRole($event.target.value)">
                               <option selected>Seleccionar...</option>
-                              <option value="1">Alumno</option>
-                              <option value="2">Profesor</option>
+                              <option value="1">Cliente</option>
+                              <option value="2">Especialista</option>
                               <option value="3">Administrador</option>
                             </select>
                         </div>
                     </div>
-
+                    <div class="row text-left" *ngIf="this.selectedRole.cliente == true">
+                        <div class="col">
+                            <!-- Multiple Checkboxes -->
+                            <div class="form-group" id="esPaciente" style='margin-left: 15px;'>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipoPaciente" [(ngModel)]="this.dataApi.selectedUser.cobertura" value="Particular">
+                                    <label class="form-check-label" for="tipoPaciente1">Particular</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipoPaciente" [(ngModel)]="this.dataApi.selectedUser.cobertura" value="Obra Social">
+                                    <label class="form-check-label" for="tipoPaciente2">Por Obra Social</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row  text-left" *ngIf="this.dataApi.selectedUser.cobertura == 'Obra Social'">
+                        <div class="col">
+                            <label class="col-md-10 control-label" for="obrasocial">Obra social</label>
+                            <div class="col-md-10">
+                                <input id="obrasocial" name="obrasocial" type="text" placeholder="" class="form-control input-md" [(ngModel)]="this.dataApi.selectedUser.obraSocial">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="col-md-10 control-label" for="credencial">Nro. de credencial</label>
+                            <div class="col-md-10">
+                                <input id="credencial" name="credencial" type="text" placeholder="" class="form-control input-md" [(ngModel)]="this.dataApi.selectedUser.nroCarnet">
+                            </div>
+                        </div>
+                    </div>
+                    <div id='error' *ngIf="this.haveError">
+                        <p> Oh no! ah ocurrido un error! </p>
+                        <p> {{this.error}} </p>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Salir</button>
-                        <button type="submit" class="btn btn-primary">Guardar Turno</button>
+                        <button type="submit" class="btn btn-primary">Guardar Usuario</button>
                     </div>
                 </form>
             </div>

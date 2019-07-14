@@ -219,7 +219,10 @@ export class DataApiService {
      }));
  }
   agregarTurno(turno: turnoInteface): void {
-    this.listaTurnos.add(turno);
+    this.listaTurnos.add(turno).then(result => {
+      turno.id = result.id;
+      this.modificarTurno(turno);
+    });
   }
   modificarTurno(turno: turnoInteface) {
     const idTurno = turno.id;
@@ -232,7 +235,10 @@ export class DataApiService {
   }
 
   agregarUsuario(user: UserInterface): void {
-    this.listaTurnos.add(user);
+    this.listaUsers.add(user).then(result => {
+      user.id = result.id;
+      this.modificarTurno(user);
+    });
   }
   modificarUsuario(user: UserInterface) {
     this.userDoc = this.afs.doc<UserInterface>(`users/${user.id}`);

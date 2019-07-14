@@ -1,3 +1,4 @@
+import { UserInterface } from './../models/user';
 import { Especialidad } from './../models/especialidad';
 import { Especialistas } from './../models/especialistas';
 import { turnoInteface } from './../models/turnoInterface';
@@ -16,21 +17,20 @@ export class ModalNuevoTurnoComponent implements OnInit {
 
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userId: string;
-  @Input() cliente: string;
   public especialistas: Especialistas[];
   public especialista = '';
   public especialidades: Especialidad[];
   public especialidad = '';
   public turno: turnoInteface;
-  //public hoy: new Date();
+  public usuarios: UserInterface[];
 
   ngOnInit() {
-    this.getEspecialistas();
     this.getEspecialidades();
+    this.gettUsuarios();
   }
-  getEspecialistas() {
-    this.dataApi.getEspecialistas().subscribe( especialistas => {
-      this.especialistas = especialistas;
+  gettUsuarios() {
+    this.dataApi.getUsers().subscribe( users => {
+      this.usuarios = users;
     });
   }
   getEspecialidades() {
@@ -42,9 +42,6 @@ export class ModalNuevoTurnoComponent implements OnInit {
     this.turno = turnoForm.value;
     this.turno.userId = this.userId;
     this.turno.estado = 'reservado';
-    if(typeof(this.cliente) !== 'undefined') {
-      this.turno.cliente = this.cliente;
-    }
     if (turnoForm.value.id == null) {
       // New
       this.dataApi.agregarTurno(this.turno);
@@ -53,6 +50,7 @@ export class ModalNuevoTurnoComponent implements OnInit {
       this.dataApi.modificarTurno(this.turno);
     }
     this.turno = null;
+    this.dataApi.selectedTurno = null;
     turnoForm.resetForm();
     this.btnClose.nativeElement.click();
   }
