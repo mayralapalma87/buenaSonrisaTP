@@ -5,6 +5,7 @@ import { turnoInteface } from './../models/turnoInterface';
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { DataApiService } from '../services/data-api.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-modalNuevoTurno',
@@ -12,11 +13,12 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./modalNuevoTurno.component.css']
 })
 export class ModalNuevoTurnoComponent implements OnInit {
-   constructor(public dataApi: DataApiService) {
+   constructor(public dataApi: DataApiService, private authService: AuthService) {
   }
 
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userId: string;
+  @Input() isAdmin: boolean;
   public especialistas: Especialistas[];
   public especialista = '';
   public especialidades: Especialidad[];

@@ -5,4 +5,6 @@ export interface EncuestaInterface {
   review ?: string;
   idTurno?: any;
   userId?: any;
+  user?: string;
+  especialista?: string;
 }

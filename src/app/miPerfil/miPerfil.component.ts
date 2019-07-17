@@ -49,20 +49,20 @@ urlImage: Observable<string>;
     this.getCurrentUser();
   }
   getCurrentUser() {
-    this.authService.isAuth().subscribe(auth => {
-      if (auth) {
-        this.user.email = auth.email;
-        if (auth.photoURL !== null) {
-        this.user.foto = auth.photoURL;
+    this.authService.isAuth().subscribe(us => {
+      if (us) {
+        this.user.email = us.email;
+        if (us.photoURL !== null) {
+        this.user.foto = us.photoURL;
         }
-        if (auth.providerData[0].providerId !== null) {
-        this.providerId = auth.providerData[0].providerId;
+        if (us.providerData[0].providerId !== null) {
+        this.providerId = us.providerData[0].providerId;
         }
         this.isLogged = true;
-        this.userId = auth.uid;
+        this.userId = us.uid;
         this.user.id = this.userId;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.isAdmin = userRole.roles.admin;
           this.user.roles  = userRole.roles;
       });
     } else {

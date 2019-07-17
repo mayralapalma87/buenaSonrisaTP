@@ -18,7 +18,7 @@ export class AuthService {
     especialista: false,
     admin: false
   };
-
+  private listaUsers: AngularFirestoreCollection<UserInterface>;
   isAuth() {
     // tslint:disable-next-line: no-shadowed-variable
     return this.afsauth.authState.pipe(map(auth => auth));
@@ -47,7 +47,9 @@ export class AuthService {
         .then(userData => {
           resolve(userData),
             this.updateUserData(userData.user, user, rol);
-        }).catch(err => console.log(reject(err)));
+        }).catch(err => console.log(reject(
+            console.log('error', err)
+          )));
     });
   }
  private updateUserData(userregistry, userData, role) {
@@ -56,14 +58,14 @@ export class AuthService {
       id: userregistry.uid,
       email: userregistry.email,
       roles: role,
-      nombre: userData != null ? userData.nombre : userregistry.displayName,
-      telefono: userData != null ? userData.telefono : userregistry.phoneNumber,
-      apellido: userData != null ? userData.apellido : '',
-      cobertura: userData != null ? userData.cobertura : '',
-      obraSocial: userData != null ? userData.obraSocial : '',
-      nroCarnet: userData != null ? userData.nroCarnet : '',
+      nombre: userData !== undefined && userData !== null && userData.nombre !== undefined ? userData.nombre : userregistry.displayName,
+      telefono: userData !== undefined && userData !== null && userData.telefono !== undefined ? userData.telefono : userregistry.phoneNumber,
+      apellido: userData !== undefined && userData !== null && userData.apellido !== undefined ? userData.apellido : '',
+      cobertura: userData !== undefined && userData !== null && userData.cobertura !== undefined ? userData.cobertura  : '',
+      obraSocial: userData !== undefined && userData !== null && userData.obraSocial !== undefined ? userData.obraSocial : '',
+      nroCarnet: userData !== undefined && userData !== null && userData.nroCarnet !== undefined ? userData.nroCarnet : '',
     };
-    return userRef.set(data, { merge: true })
+    return userRef.set(data, { merge: true });
   }
   isUserAdmin(userUid) {
     return this.afs.doc<UserInterface>(`users/${userUid}`).valueChanges();

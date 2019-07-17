@@ -1,3 +1,4 @@
+import { FilterBusquedaPipe } from './Pipes/filterBusqueda.pipe';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,7 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-
+import * as $ from 'jquery';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
@@ -34,6 +35,7 @@ import { ListaUsuariosComponent } from './listaUsuarios/listaUsuarios.component'
 import { ModalNuevoUsuarioComponent } from './modalNuevoUsuario/modalNuevoUsuario.component';
 import { ModalBusquedaComponent } from './modalBusqueda/modalBusqueda.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @NgModule({
    declarations: [
@@ -56,7 +58,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
       ListaUsuariosComponent,
       ModalNuevoUsuarioComponent,
       ModalBusquedaComponent,
-      BusquedaComponent
+      BusquedaComponent,
+      FilterBusquedaPipe
    ],
    imports: [
       BrowserModule,
@@ -65,11 +68,14 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
       HttpClientModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireDatabaseModule,
-      AngularFireStorageModule
+      AngularFireStorageModule,
+   ],
+   exports: [
+      FilterBusquedaPipe
    ],
    providers: [
       AngularFireAuth,
-      AngularFirestore
+      AngularFirestore,
    ],
    bootstrap: [
       AppComponent
@@ -77,3 +83,4 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 })
 export class AppModule {
 }
+

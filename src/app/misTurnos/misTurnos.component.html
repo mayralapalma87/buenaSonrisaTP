@@ -1,15 +1,17 @@
 <br>
-<!--
-<div class="pd">
-   <app-busqueda [listaTurnos]="Turnos" (filtro)="mostrarDatos($event)"></app-busqueda>
+<br>
+<br>
+<!-- <div class="row">
+    <div class="col">
+        <div class="form-group">
+            <input type="text" class="form-control" name="filterBusqueda" placeholder="Buscar turnos por especialidad..." [(ngModel)]="filterBusqueda">
+        </div>
+    </div>
 </div> -->
-<br>
-<br>
 <div class="table-responsive-md">
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Cod. Reserva</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Especialidad</th>
                 <th scope="col">Especialista</th>
@@ -22,9 +24,8 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let turno of turnos; index as i">
+            <ng-container *ngFor="let turno of turnos">
                 <tr *ngIf="turno.userId == this.userId || isAdmin">
-                    <th scope="row">{{i+1}}</th>
                     <td>{{turno.cliente}}</td>
                     <td>{{turno.especialidad}}</td>
                     <td>{{turno.especialista}}</td>
@@ -67,6 +68,6 @@
         </tbody>
     </table>
 </div>
-<app-modalNuevoTurno [userId]="userId"></app-modalNuevoTurno>
-<app-modalResenaTurno></app-modalResenaTurno>
-<app-modalEncuesta></app-modalEncuesta>
+<app-modalNuevoTurno [userId]="userId" [isAdmin]="isAdmin"></app-modalNuevoTurno>
+<app-modalResenaTurno [userId]="userId" [isAdmin]="isAdmin"></app-modalResenaTurno>
+<app-modalEncuesta [userId]="userId" [isAdmin]="isAdmin"></app-modalEncuesta>

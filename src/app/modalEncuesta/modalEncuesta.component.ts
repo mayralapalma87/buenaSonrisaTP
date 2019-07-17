@@ -14,14 +14,16 @@ import { AuthService } from '../services/auth.service';
 export class ModalEncuestaComponent implements OnInit {
   constructor(private route: ActivatedRoute, public dataApi: DataApiService, private authService: AuthService) { }
   @ViewChild('btnClose') btnClose: ElementRef;
-  @Input() userUid: string;
+  @Input() userId: string;
+  @Input() isAdmin: any;
   public turno: turnoInteface;
-  public isAdmin: any = null;
-  public userId: string = null;
+  public userUid: string = null;
 
   public encuesta: EncuestaInterface = {
     id : '',
     userId : '',
+    user: '',
+    especialista: '',
     idTurno : '',
     puntajeEspecialista: 0,
     puntajeClinica: 0,
@@ -35,9 +37,9 @@ export class ModalEncuestaComponent implements OnInit {
   getCurrentUser() {
     this.authService.isAuth().subscribe(auth => {
       if (auth) {
-        this.userId = auth.uid;
+        this.userUid = auth.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.isAdmin = userRole.roles.admin;
         });
       }
     });

@@ -29,16 +29,20 @@ export class NavbarComponent implements OnInit {
   }
 
   getCurrentUser() {
-    this.auth.isAuth().subscribe(auth => {
-      if (auth) {
+    this.auth.isAuth().subscribe(us => {
+      if (us) {
+        console.log('UserData: ', us);
         this.isLogged = true;
-        this.userId = auth.uid;
-        this.user.nombre = auth.displayName;
-        this.user.email = auth.email;
-        this.user.foto = auth.photoURL;
-        this.auth.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = userRole.roles.admin;
-          this.user.roles  = userRole.roles;
+        this.userId = us.uid;
+        this.user.nombre = us.displayName;
+        this.user.email = us.email;
+        this.user.foto = us.photoURL;
+        this.auth.isUserAdmin(us.uid).subscribe(userRole => {
+          console.log('UserDataRole: ', userRole);
+          if (userRole !== undefined) {
+            this.isAdmin = userRole.roles.admin;
+            this.user.roles  = userRole.roles;
+          }
       });
     } else {
         this.isLogged = false;

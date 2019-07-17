@@ -15,5 +15,6 @@ export interface UserInterface {
   obraSocial?: any;
   nroCarnet?: any;
   foto?: any;
-  roles: Roles;
+  roles?: Roles;
+  especialidad?: any;
 }

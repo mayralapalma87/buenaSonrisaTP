@@ -27,11 +27,11 @@
                             <label for="especialista">Especialista:</label>
                             <select name="especialista" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedTurno.especialista">
                                 <option selected>Seleccionar...</option>
-                              <ng-container *ngFor="let us of this.usuarios; index as i">
-                                <option *ngIf="us.roles.especialista == true">
-                                  {{us.nombre}} {{us.apellido}}
-                                </option>
-                              </ng-container>
+                                <ng-container *ngFor="let us of this.usuarios; index as i">
+                                  <option *ngIf="us.roles.especialista == true && us.especialidad == this.dataApi.selectedTurno.especialidad">
+                                    {{us.apellido}} {{us.nombre}}
+                                  </option>
+                                </ng-container>
                             </select>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <select name="cliente" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedTurno.cliente">
                               <option selected>Seleccionar...</option>
                               <ng-container *ngFor="let us of this.usuarios; index as i">
-                                <option *ngIf="us.roles.cliente == true">
+                                <option *ngIf="us.roles.cliente == true && (us.id == this.userId || this.isAdmin)">
                                   {{us.nombre}} {{us.apellido}}
                                 </option>
                               </ng-container>

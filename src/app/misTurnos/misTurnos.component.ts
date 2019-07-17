@@ -1,9 +1,10 @@
 import { AuthService } from './../services/auth.service';
 import { DataApiService } from './../services/data-api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
 import { turnoInteface } from '../models/turnoInterface';
 import { NgForm } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
+import { from } from 'rxjs';
 
 @Component({
 // tslint:disable-next-line: component-selector
@@ -20,16 +21,16 @@ export class MisTurnosComponent implements OnInit {
   public isAdmin: any = null;
   public userId: string = null;
   public cliente: string = null;
+  filterBusqueda = '';
 
   ngOnInit() {
     this.getTurnos();
     this.getCurrentUser();
   }
-
   getCurrentUser() {
-    this.authService.isAuth().subscribe(auth => {
-      if (auth) {
-        this.userId = auth.uid;
+    this.authService.isAuth().subscribe(us => {
+      if (us) {
+        this.userId = us.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
           this.isAdmin = userRole.roles.admin;
         });
@@ -62,3 +63,4 @@ export class MisTurnosComponent implements OnInit {
     this.turnos = [];
   }
 }
+

@@ -45,12 +45,12 @@ export class RegistrarseComponent implements OnInit {
     this.getCurrentUser();
   }
   getCurrentUser() {
-    this.authservice.isAuth().subscribe(auth => {
-      if (auth) {
+    this.authservice.isAuth().subscribe(us => {
+      if (us) {
         this.isLogged = true;
-        this.userId = auth.uid;
+        this.userId = us.uid;
         this.authservice.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.isAdmin = userRole.roles.admin;
           this.user.roles  = userRole.roles;
       });
     } else {
@@ -59,7 +59,6 @@ export class RegistrarseComponent implements OnInit {
     });
   }
   onUpload(e) {
-    // console.log('subir', e.target.files[0]);
     const id = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
     const filePath = `uploads/pofile_${id}`;
@@ -98,7 +97,7 @@ export class RegistrarseComponent implements OnInit {
           });
         }
       });
-      this.router.navigate(['misTurnos']);
+      this.router.navigate(['miPerfil']);
     }).catch((error) => {
       // error
       this.haveError = true;

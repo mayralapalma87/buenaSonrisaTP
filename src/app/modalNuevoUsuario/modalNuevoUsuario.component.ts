@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Especialidad } from '../models/especialidad';
 
 @Component({
   selector: 'app-modalNuevoUsuario',
@@ -33,12 +34,21 @@ export class ModalNuevoUsuarioComponent implements OnInit {
   public isLogged = false;
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
+  public especialidades: Especialidad[];
+  public especialidad = '';
+
   ngOnInit() {
    // this.getUsuarios();
+   this.getEspecialidades();
   }
   getUsuarios() {
     this.dataApi.getUsers().subscribe( usuarios => {
       this.usuarios = usuarios;
+    });
+  }
+  getEspecialidades() {
+    this.dataApi.getEspecialidades().subscribe( especialidades => {
+      this.especialidades = especialidades;
     });
   }
   setRole(value) {

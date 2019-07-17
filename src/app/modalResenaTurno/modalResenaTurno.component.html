@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <form name="formTurno" #formTurno="ngForm" (ngSubmit)="onSaveTurno(formTurno)">
                     <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
-                    <input type="hidden" name="userUid" [value]="userUid">
+                    <input type="hidden" name="userUid" [value]="userId">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <div class="col-md-15" *ngIf="isAdmin == true; else noAdmin">

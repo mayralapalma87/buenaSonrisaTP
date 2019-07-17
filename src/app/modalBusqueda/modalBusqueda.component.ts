@@ -24,7 +24,7 @@ export class ModalBusquedaComponent implements OnInit {
       this.arrayDeUsuariosOriginalParaFiltrar = usuarios;
     });
   }
-  //Metodos de busqueda:
+  // Metodos de busqueda:
   mostrarDatos(Usuarios) {
     console.log('UsuariosRecibidosBusqueda:', Usuarios);
     this.usuariosModal = Usuarios;
