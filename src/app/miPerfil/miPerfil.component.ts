@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { Especialidad } from '../models/especialidad';
 
 @Component({
 // tslint:disable-next-line: component-selector
@@ -35,6 +36,7 @@ user: UserInterface = {
     admin: false
   }
 };
+public especialidades: Especialidad[];
 public isAdmin: any = null;
 public userId: string = null;
 public isLogged = false;
@@ -49,6 +51,12 @@ urlImage: Observable<string>;
  public providerId: string = 'null';
   ngOnInit() {
     this.getCurrentUser();
+    this.getEspecialidades();
+  }
+  getEspecialidades() {
+    this.dataApi.getEspecialidades().subscribe( especialidades => {
+      this.especialidades = especialidades;
+    });
   }
   getCurrentUser() {
     if (this.dataApi.currentUser.id == null) {
@@ -75,24 +83,27 @@ urlImage: Observable<string>;
       }
       this.dataApi.getUserDataUserbyId(this.userId).subscribe(usuario => {
       if (usuario) {
-        if (usuario.cobertura !== null) {
+        if (usuario.cobertura !== undefined && usuario.cobertura !== null) {
         this.user.cobertura = usuario.cobertura;
         }
-        if (usuario.nroCarnet !== null) {
+        if (usuario.nroCarnet !== undefined && usuario.nroCarnet !== null) {
         this.user.nroCarnet = usuario.nroCarnet;
         }
-        if (usuario.nombre !== null) {
+        if (usuario.nombre !== undefined && usuario.nombre !== null) {
         this.user.nombre = usuario.nombre;
         }
-        if (usuario.apellido !== null) {
+        if (usuario.apellido !== undefined && usuario.apellido !== null) {
         this.user.apellido = usuario.apellido;
         }
-        if (usuario.foto !== null) {
+        if (usuario.foto !== undefined && usuario.foto !== null) {
           this.user.foto = usuario.foto;
         }
-        if (usuario.telefono !== null) {
+        if (usuario.telefono !== undefined && usuario.telefono !== null) {
           this.user.telefono = usuario.telefono;
-          }
+        }
+        if (usuario.especialidad !== undefined && usuario.especialidad !== null) {
+            this.user.especialidad = usuario.especialidad;
+        }
       } else {
         let usuario;
         this.dataApi.getUsers().subscribe( usuarios => {
@@ -105,24 +116,27 @@ urlImage: Observable<string>;
             this.user.id = usuario.id;
             this.user.roles  = usuario.roles;
             this.isAdmin = usuario.roles.admin;
-            if (usuario.cobertura !== null) {
+            if (usuario.cobertura !== undefined && usuario.cobertura !== null) {
             this.user.cobertura = usuario.cobertura;
             }
-            if (usuario.nroCarnet !== null) {
+            if (usuario.nroCarnet !== undefined && usuario.nroCarnet !== null) {
             this.user.nroCarnet = usuario.nroCarnet;
             }
-            if (usuario.nombre !== null) {
+            if (usuario.nombre !== undefined && usuario.nombre !== null) {
             this.user.nombre = usuario.nombre;
             }
-            if (usuario.apellido !== null) {
+            if (usuario.apellido !== undefined && usuario.apellido !== null) {
             this.user.apellido = usuario.apellido;
             }
-            if (usuario.foto !== null) {
+            if (usuario.foto !== undefined && usuario.foto !== null) {
               this.user.foto = usuario.foto;
             }
-            if (usuario.telefono !== null) {
+            if (usuario.telefono !== undefined && usuario.telefono !== null) {
               this.user.telefono = usuario.telefono;
               }
+            if (usuario.especialidad !== undefined && usuario.especialidad !== null) {
+                this.user.especialidad = usuario.especialidad;
+            }
             }
         });
       }

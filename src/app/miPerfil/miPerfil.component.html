@@ -58,6 +58,16 @@
                             </div>
                         </div>
                         <br>
+                        <div class="form-row" *ngIf="user.roles.especialista">
+                            <div class="form-group col-md-6">
+                                <label for="especialidad">Especialidad:</label>
+                                <select name="especialidad" class="form-control" placeholder="Seleccione..." [(ngModel)]="user.especialidad">
+                                <option selected>Seleccionar...</option>
+                                <option *ngFor="let especialidad of this.especialidades"> {{especialidad.descripcion}}</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
                         <div class="row text-left" *ngIf="user.roles.cliente == true">
                             <div class="col">
                                 <!-- Multiple Checkboxes -->
