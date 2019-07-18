@@ -28,7 +28,6 @@ import { ModalNuevoTurnoComponent } from './modalNuevoTurno/modalNuevoTurno.comp
 import { environment } from 'src/environments/environment';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { ModalResenaTurnoComponent } from './modalResenaTurno/modalResenaTurno.component';
-import { ModalNuevoClienteComponent } from './modalNuevoCliente/modalNuevoCliente.component';
 import { ModalEncuestaComponent } from './modalEncuesta/modalEncuesta.component';
 import { ListaUsuariosComponent } from './listaUsuarios/listaUsuarios.component';
 import { ModalNuevoUsuarioComponent } from './modalNuevoUsuario/modalNuevoUsuario.component';
@@ -52,7 +51,6 @@ import { Pipe, PipeTransform } from '@angular/core';
       ModalNuevoTurnoComponent,
       EncuestaComponent,
       ModalResenaTurnoComponent,
-      ModalNuevoClienteComponent,
       ModalEncuestaComponent,
       ListaUsuariosComponent,
       ModalNuevoUsuarioComponent,

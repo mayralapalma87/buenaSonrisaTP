@@ -3,107 +3,119 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalNuevaEncuestaLabel">
-                    'Encuesta de Satisfacción:'
+                    Encuesta de Satisfacción del cliente:
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal" (ngSubmit)="onSaveEncuesta()">
+            <div class="modal-body d-block" *ngIf="this.roles.cliente ; else encuestaDisable">
+                <form class="form-horizontal text-center" (ngSubmit)="onSaveEncuesta()">
                     <input type="hidden" name="id" [(ngModel)]="this.dataApi.selectedTurno.id">
                     <input type="hidden" name="userUid" [value]="userUid">
                     <fieldset>
                         <!-- Form Name -->
                         <div class="row">
                             <label class="col-md-10 control-label">Puntaje de la clinica en general</label>
-
+                            <br>
                             <!-- Multiple Checkboxes -->
                             <div class="btn-group btn-group-toggle" id="puntajeClinica">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica1" id="puntajeClinica1" value="1">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica1">1</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica1" id="puntajeClinica1" value="1">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica2" id="puntajeClinica2" value="2">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica2">2</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica2" id="puntajeClinica2" value="2">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica3" id="puntajeClinica3" value="3">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica3">3</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica3" id="puntajeClinica3" value="3">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica4" id="puntajeClinica4" value="4">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica4">4</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica4" id="puntajeClinica4" value="4">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica5" id="puntajeClinica5" value="5">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica5">5</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica5" id="puntajeClinica5" value="5">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica6" id="puntajeClinica6" value="6">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica6">6</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica6" id="puntajeClinica6" value="6">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica7" id="puntajeClinica7" value="7">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica7">7</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica7" id="puntajeClinica7" value="7">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica8" id="puntajeClinica8" value="8">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica8">8</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica8" id="puntajeClinica8" value="8">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica9" id="puntajeClinica9" value="9">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica9">9</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica9" id="puntajeClinica9" value="9">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" [(ngModel)]="encuesta.puntajeClinica" name="puntajeClinica10" id="puntajeClinica10" value="10">
+                                <div class="form-check-inline">
                                     <label class="form-check-label" for="puntajeClinica10">10</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica" name="puntajeClinica10" id="puntajeClinica10" value="10">
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <label class="col-md-10 control-label">Puntaje de Atencion del profesional</label>
-                            <div class="col-md-10">
-                                <div class="review-block-rate col-md-10">
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="10">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true">1</span>
-                            </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="2">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true">2</span>
-                            </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="3">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true">3</span>
-                            </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="4">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true">4</span>
-                            </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="5">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true">5</span>
-                            </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="6">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true">6</span>
-                              </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="7">
-                                  <span class="glyphicon glyphicon-star" aria-hidden="true">7</span>
-                                </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="8">
-                                    <span class="glyphicon glyphicon-star" aria-hidden="true">8</span>
-                                  </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="9">
-                                      <span class="glyphicon glyphicon-star" aria-hidden="true">9</span>
-                                    </button>
-                                    <button type="button" class="btn btn-outline-warning" [(ngModel)]="encuesta.puntajeEspecialista" value="10">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true">10</span>
-                                      </button>
+                            <br>
+                            <!-- Multiple Checkboxes -->
+                            <div class="btn-group btn-group-toggle" id="puntajeEspecialista">
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista1">1</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista1" id="puntajeEspecialista1" value="1">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista2">2</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista2" id="puntajeEspecialista2" value="2">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista3">3</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista3" id="puntajeEspecialista3" value="3">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista4">4</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista4" id="puntajeEspecialista4" value="4">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista5">5</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista5" id="puntajeEspecialista5" value="5">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista6">6</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista6" id="puntajeEspecialista6" value="6">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista7">7</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista7" id="puntajeEspecialista7" value="7">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista8">8</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista8" id="puntajeEspecialista8" value="8">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista9">9</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista9" id="puntajeEspecialista9" value="9">
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="puntajeEspecialista10">10</label>
+                                    <input class="form-check-input" type="radio" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista" name="puntajeEspecialista10" id="puntajeEspecialista10" value="10">
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <hr>
                         <div class="row">
                             <label class="col-md-10 control-label">Por favor deje una breve reseña sobre su experiencia en nuestra clinica:</label>
                             <div class="col-md-10">
-                                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Deje sus comentarios aqui..." rows="5" [(ngModel)]="encuesta.review"></textarea>
+                                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Deje sus comentarios aqui..." rows="5" [(ngModel)]="this.dataApi.selectedTurno.encuesta.review"></textarea>
                             </div>
                         </div>
 
@@ -112,16 +124,36 @@
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Salir</button>
-                            <button *ngIf="isAdmin !== true; else noAdminbtn" type="submit" class="btn btn-primary">Guardar Reseña</button>
-                            <ng-template #noAdminbtn>
-                                <button class="btn btn-block btn-secondary" disabled=true>Guardar Reseña</button>
-                            </ng-template>
+                            <!--<button *ngIf="isAdmin !== true" type="submit" class="btn btn-primary">Guardar Reseña</button> -->
+                            <button type="submit" class="btn btn-primary">Guardar Reseña</button>
                         </div>
                         <br>
                         <br>
                     </fieldset>
                 </form>
             </div>
+            <ng-template #encuestaDisable>
+                <div>
+                    <label class="col-md-10 control-label text-center">Puntaje para la clinica en general:</label>
+                    <br>
+                    <div class="col-lx-10">
+                        <textarea class="form-control animated text-center" disabled cols="10" id="new-review" name="puntaje_cli" rows="1" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeClinica"></textarea>
+                    </div>
+                    <label class="col-md-10 control-label text-center">Puntaje para el especialista {{this.dataApi.selectedTurno.encuesta.especialista}} :</label>
+                    <br>
+                    <div class="col-lx-10">
+                        <textarea class="form-control animated text-center" disabled cols="10" id="new-review" name="puntaje_esp" rows="1" [(ngModel)]="this.dataApi.selectedTurno.encuesta.puntajeEspecialista"></textarea>
+                    </div>
+                    <label class="col-md-10 control-label text-center">Reseña del cliente {{this.dataApi.selectedTurno.encuesta.user}} :</label>
+                    <br>
+                    <div class="col-lx-10">
+                        <textarea class="form-control animated text-center" disabled cols="10" id="new-review" name="resena_cliente" rows="1" [(ngModel)]="this.dataApi.selectedTurno.encuesta.review"></textarea>
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">Salir</button>
+                </div>
+                <br>
+            </ng-template>
         </div>
     </div>
 </div>

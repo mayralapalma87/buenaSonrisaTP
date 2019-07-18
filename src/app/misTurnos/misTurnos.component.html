@@ -47,7 +47,8 @@
                             <button class="btn btn-danger" disabled="true">Cancelar</button>
                         </td>
                     </ng-template>
-                    <td *ngIf='turno.estado == "realizado" && turno.userId == userId ; else encuestaDisable'>
+                    <!-- <td *ngIf='turno.estado == "realizado" && turno.userId == userId ; else encuestaDisable'> -->
+                    <td *ngIf='turno.estado == "realizado" ; else encuestaDisable'>
                         <button class="btn btn-block btn-warning" id="buttonEncuesta" name="buttonEncuesta" data-toggle="modal" data-target="#modalEncuesta" (click)="modificarTurno(turno)">Encuesta de satisfacción</button>
                     </td>
                     <ng-template #encuestaDisable>

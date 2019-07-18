@@ -80,6 +80,7 @@ export class RegistrarseComponent implements OnInit {
      }
   }
   onAddUser() {
+    this.user.creacionAdmin = false;
     this.authservice.onRegisterUser(this.user, this.rol)
     .then((res) => {
       this.authservice.isAuth().subscribe( userService => {

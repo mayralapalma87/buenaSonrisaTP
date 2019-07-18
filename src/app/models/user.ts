@@ -17,4 +17,5 @@ export interface UserInterface {
   foto?: any;
   roles?: Roles;
   especialidad?: any;
+  creacionAdmin?: boolean;
 }

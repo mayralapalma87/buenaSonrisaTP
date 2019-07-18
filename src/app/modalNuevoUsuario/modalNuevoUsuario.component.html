@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalNuevoUsuarioLabel">
-                    {{ !this.dataApi.selectedUser.id ? 'Nuevo Usuario' : 'Modificar Usuario'}}
+                    ABM de Usuarios
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -11,8 +11,8 @@
             </div>
             <div class="modal-body">
                 <form name="formUsuario" #formUsuario="ngForm" (ngSubmit)="onSaveUsuario(formUsuario)">
-                    <input name="id" [(ngModel)]="this.dataApi.selectedUser.id">
-                    <input name="userUid" [value]="userId">
+                    <input name="id" type="hidden" [(ngModel)]="this.dataApi.selectedUser.id">
+                    <input name="userUid" type="hidden" [value]="userId">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label" for="nombre">Nombre:</label>
@@ -41,42 +41,25 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="especialidad">Especialidad:</label>
-                            <select name="especialidad" class="form-control" placeholder="Seleccionar..." [(ngModel)]="this.dataApi.selectedUser.especialidad">
-                              <option selected>Seleccionar...</option>
-                             <option *ngFor="let especialidad of especialidades">
-                                {{especialidad.descripcion}}
-                              </option>
+                            <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
+                            <select class="custom-select col-md-12" id="inlineFormCustomSelect" placeholder="Seleccionar..." [(ngModel)]="this.selectedRole" (change)="setRole($event.target.value)">
+                          <option selected>Seleccionar...</option>
+                          <option value="1">Cliente</option>
+                          <option value="2">Especialista</option>
+                          <option value="3">Administrador</option>
                         </select>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row" *ngIf="this.dataApi.selectedUser.roles.especialista">
                         <div class="form-group col-md-6">
-                            <label class="col-md-10 control-label" for="inlineFormCustomSelect">Tipo de usuario</label>
-                            <select class="custom-select col-md-12" id="inlineFormCustomSelect" placeholder="Seleccionar..." [(ngModel)]="this.selectedRole" (change)="setRole($event.target.value)">
+                            <label for="especialidad">Especialidad:</label>
+                            <select name="especialidad" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedUser.especialidad">
                             <option selected>Seleccionar...</option>
-                            <option value="1">Cliente</option>
-                            <option value="2">Especilista</option>
-                            <option value="3">Administrador</option>
+                            <option *ngFor="let especialidad of this.especialidades"> {{especialidad.descripcion}}</option>
                           </select>
                         </div>
                     </div>
-                    <div class="row text-left" *ngIf="this.selectedRole.cliente == true">
-                        <div class="col">
-                            <!-- Multiple Checkboxes -->
-                            <div class="form-group" id="esPaciente" style='margin-left: 15px;'>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipoPaciente" [(ngModel)]="this.dataApi.selectedUser.cobertura" value="Particular">
-                                    <label class="form-check-label" for="tipoPaciente1">Particular</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipoPaciente" [(ngModel)]="this.dataApi.selectedUser.cobertura" value="Obra Social">
-                                    <label class="form-check-label" for="tipoPaciente2">Por Obra Social</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row text-left" *ngIf="this.selectedRole.Especialista == true">
+                    <div class="form-row text-left" *ngIf="this.dataApi.selectedUser.roles.cliente">
                         <div class="col">
                             <!-- Multiple Checkboxes -->
                             <div class="form-group" id="esPaciente" style='margin-left: 15px;'>
@@ -92,7 +75,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row  text-left" *ngIf="this.dataApi.selectedUser.cobertura == 'Obra Social'">
+                    <div class="form-row  text-left" *ngIf="this.dataApi.selectedUser.cobertura == 'Obra Social'">
                         <div class="col">
                             <label class="col-md-10 control-label" for="obrasocial">Obra social</label>
                             <div class="col-md-10">
@@ -106,6 +89,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                     <div id='error' *ngIf="this.haveError">
                         <p> Oh no! ah ocurrido un error! </p>
                         <p> {{this.error}} </p>

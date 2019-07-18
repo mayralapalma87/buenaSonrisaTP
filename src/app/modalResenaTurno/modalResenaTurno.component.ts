@@ -20,10 +20,25 @@ export class ModalResenaTurnoComponent implements OnInit {
   @Input() isAdmin: any;
   public turno: turnoInteface;
   public useruId: string = null;
-  public roles: Roles;
-
+  public roles: Roles = {
+    admin: false,
+    especialista: false,
+    cliente: false
+  };
   ngOnInit() {
-
+    this.getCurrentUser();
+  }
+  getCurrentUser() {
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        this.useruId = auth.uid;
+        this.authService.isUserAdmin(auth.uid).subscribe(userRole => {
+          if (userRole !== undefined) {
+            this.roles = userRole.roles;
+          }
+        });
+      }
+    });
   }
 
   onSaveTurno(turnoForm: NgForm): void {

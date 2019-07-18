@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { DataApiService } from '../services/data-api.service';
-import { turnoInteface } from '../models/turnoInterface';
 import { UserInterface, Roles } from '../models/user';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Especialidad } from '../models/especialidad';
 
@@ -21,21 +19,21 @@ export class ModalNuevoUsuarioComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
   @Input() userId: string;
   @ViewChild('imageUser') inpupImageUser: ElementRef;
+  public especialidades: Especialidad[];
+  public especialidad = '';
   public usuarios: UserInterface[];
   rol: Roles = {
     cliente: false,
     especialista: false,
     admin: false
   };
-  error = '';
-  haveError = false;
   public selectedRole: any;
   public isAdmin: any = null;
   public isLogged = false;
+  error = '';
+  haveError = false;
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
-  public especialidades: Especialidad[];
-  public especialidad = '';
 
   ngOnInit() {
    // this.getUsuarios();
@@ -53,17 +51,17 @@ export class ModalNuevoUsuarioComponent implements OnInit {
   }
   setRole(value) {
     if (value === '1') {
-     this.rol.cliente = true;
+      this.dataApi.selectedUser.roles.cliente = true;
     }
     if (value === '2') {
-      this.rol.especialista = true;
+      this.dataApi.selectedUser.roles.especialista = true;
     }
     if (value === '3') {
-      this.rol.admin = true;
+      this.dataApi.selectedUser.roles.admin = true;
      }
   }
   onSaveUsuario(UsuarioForm: NgForm): void {
-    this.dataApi.selectedUser.roles = this.rol;
+    this.dataApi.selectedUser.creacionAdmin = true;
     if (this.dataApi.selectedUser.id == null) {
       this.dataApi.agregarUsuario(this.dataApi.selectedUser);
     } else {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataApiService } from './../services/data-api.service';
 import { turnoInteface } from '../models/turnoInterface';
 import { AuthService } from '../services/auth.service';
+import { Roles } from '../models/user';
 
 @Component({
   selector: 'app-agendaEspecialista',
@@ -12,15 +13,17 @@ export class AgendaEspecialistaComponent implements OnInit {
 
   constructor(private dataApi: DataApiService, private authService: AuthService) { }
   public turnos: turnoInteface[];
-  public turnosByUser: turnoInteface[];
   public turno: '';
   public turnoCancel: turnoInteface = {};
   public hoy = new Date();
   public hoyText = this.hoy.toDateString();
   public isAdmin: any = null;
   public userId: string = null;
-
-
+  public rol: Roles = {
+    admin: false,
+    especialista: false,
+    cliente: false
+  };
   ngOnInit() {
     this.getTurnos();
     this.getCurrentUser();
@@ -30,7 +33,8 @@ export class AgendaEspecialistaComponent implements OnInit {
       if (auth) {
         this.userId = auth.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          this.isAdmin = userRole.roles.admin;
+          this.rol = userRole.roles;
         });
       }
     });
@@ -42,13 +46,6 @@ export class AgendaEspecialistaComponent implements OnInit {
     });
   }
 
-  filterTurnosByUser(user) {
-    this.turnos.forEach(function(value) {
-      if (value.cliente === user) {
-        this.turnosByUser.add(value);
-      }
-    });
-  }
   cancelarTurno(idTurno: string) {
     const confirmacion = confirm('Esta seguro que desea cancelar este turno?');
     if (confirmacion) {

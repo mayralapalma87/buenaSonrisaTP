@@ -1,0 +1,9 @@
+.form-check-label {
+    margin: 2px;
+    font: normal 12px Roboto, arial, sans-serif;
+}
+
+.modal-dialog {
+    text-align: center;
+    width: 100%;
+}

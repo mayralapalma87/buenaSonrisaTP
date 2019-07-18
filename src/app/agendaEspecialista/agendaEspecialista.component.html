@@ -28,9 +28,6 @@
                     <td>{{turno.cliente}}</td>
                     <td>{{turno.fecha_hora | date}}</td>
                     <td>{{turno.estado}}</td>
-                    <!--  <td class="thmb">
-                    <img [src]='"../../assets/img"+p.foto' class="img-fluid img-thumbnail">
-                </td>-->
                     <td>
                         <button class="btn btn-block btn-warning" data-toggle="modal" data-target="#modalResenaTurno" (click)="modificarTurno(turno)">Reseña de atencion</button>
                     </td>
@@ -40,9 +37,18 @@
                             <button id="buttonCancel" disabled=true name="buttonCancel" class="btn btn-block btn-secondary">Registrar Ausencia</button>
                         </ng-template>
                     </td>
+                    <td *ngIf='turno.estado == "finalizado"; else encuestaDisable'>
+                        <button class="btn btn-block btn-warning" id="buttonEncuesta" name="buttonEncuesta" data-toggle="modal" data-target="#modalEncuesta" (click)="modificarTurno(turno)">Devolucion del paciente</button>
+                    </td>
+                    <ng-template #encuestaDisable>
+                        <td>
+                            <button id="buttonEncuesta" name="buttonEncuesta" class="btn btn-block btn-secondary" disabled=true>Devolucion del paciente</button>
+                        </td>
+                    </ng-template>
                 </tr>
             </ng-container>
         </tbody>
     </table>
 </div>
-<app-modalResenaTurno></app-modalResenaTurno>
+<app-modalResenaTurno [userId]="userId" [isAdmin]="isAdmin"></app-modalResenaTurno>
+<app-modalEncuesta [userId]="userId" [isAdmin]="isAdmin"></app-modalEncuesta>
