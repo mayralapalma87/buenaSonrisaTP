@@ -7,18 +7,21 @@ import { auth } from 'firebase';
 import { resolve } from 'url';
 import { reject } from 'q';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { DataApiService } from './data-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private afsauth: AngularFireAuth, private afs: AngularFirestore) { }
+  constructor(private dataApi: DataApiService, private afsauth: AngularFireAuth, private afs: AngularFirestore) { }
   role: Roles = {
     cliente: true,
     especialista: false,
     admin: false
   };
-  private listaUsers: AngularFirestoreCollection<UserInterface>;
+  public userId: any;
+
   isAuth() {
     // tslint:disable-next-line: no-shadowed-variable
     return this.afsauth.authState.pipe(map(auth => auth));
@@ -51,11 +54,21 @@ export class AuthService {
             console.log('error', err)
           )));
     });
-  }
+}
  private updateUserData(userregistry, userData, role) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${userregistry.uid}`);
+  this.dataApi.getUsers().subscribe( usuarios => {
+    for (let us of usuarios) {
+      if (us.email === userregistry.email) {
+        this.userId = us.id;
+        }
+      }
+    if (this.userId == null) {
+      this.userId = userregistry.uid;
+    }
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userId}`);
     const data: UserInterface = {
-      id: userregistry.uid,
+      id: this.userId,
+      userId: userregistry.uid,
       email: userregistry.email,
       roles: role,
       nombre: userData !== undefined && userData !== null && userData.nombre !== undefined ? userData.nombre : userregistry.displayName,
@@ -66,6 +79,7 @@ export class AuthService {
       nroCarnet: userData !== undefined && userData !== null && userData.nroCarnet !== undefined ? userData.nroCarnet : '',
     };
     return userRef.set(data, { merge: true });
+  });
   }
   isUserAdmin(userUid) {
     return this.afs.doc<UserInterface>(`users/${userUid}`).valueChanges();

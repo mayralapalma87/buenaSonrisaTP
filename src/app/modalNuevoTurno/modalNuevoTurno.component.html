@@ -26,7 +26,7 @@
                             <select name="especialista" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedTurno.especialista">
                                 <option selected>Seleccionar...</option>
                                 <ng-container *ngFor="let us of this.usuarios; index as i">
-                                  <option *ngIf="us.roles.especialista == true && us.especialidad == this.dataApi.selectedTurno.especialidad">
+                                  <option *ngIf="us.roles.especialista == true && us.especialidad.toLowerCase().indexOf(this.dataApi.selectedTurno.especialidad.toLowerCase()) !== -1">
                                     {{us.apellido}} {{us.nombre}}
                                   </option>
                                 </ng-container>
@@ -34,12 +34,12 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" *ngIf="this.isAdmin">
                             <label for="cliente">Cliente:</label>
                             <select name="cliente" class="form-control" placeholder="Seleccione..." [(ngModel)]="this.dataApi.selectedTurno.cliente">
                               <option selected>Seleccionar...</option>
                               <ng-container *ngFor="let us of this.usuarios; index as i">
-                                <option *ngIf="us.roles.cliente == true && (us.id == this.userId || this.isAdmin)">
+                                <option *ngIf="us.roles.cliente == true">
                                   {{us.nombre}} {{us.apellido}}
                                 </option>
                               </ng-container>
@@ -56,8 +56,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Salir</button>
-                        <button type="submit" class="btn btn-primary">Guardar Turno</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">Salir</button>
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Guardar Turno</button>
                     </div>
                 </form>
             </div>

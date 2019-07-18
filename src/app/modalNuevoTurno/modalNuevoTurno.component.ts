@@ -25,12 +25,28 @@ export class ModalNuevoTurnoComponent implements OnInit {
   public especialidad = '';
   public turno: turnoInteface;
   public usuarios: UserInterface[];
+  public currentUs: UserInterface = {
+    id: null,
+    nombre: '',
+    email: '',
+    foto: '',
+    apellido: '',
+    telefono: '',
+    cobertura: '',
+    obraSocial: '',
+    nroCarnet: '',
+    roles: {
+      cliente: false,
+      especialista: false,
+      admin: true
+    }
+  }
 
   ngOnInit() {
     this.getEspecialidades();
-    this.gettUsuarios();
+    this.getUsuarios();
   }
-  gettUsuarios() {
+  getUsuarios() {
     this.dataApi.getUsers().subscribe( users => {
       this.usuarios = users;
     });
@@ -40,10 +56,22 @@ export class ModalNuevoTurnoComponent implements OnInit {
       this.especialidades = especialidades;
     });
   }
+  getUserbyUsId() {
+    for (let us of this.usuarios) {
+      if (us.userId === this.userId) {
+        this.currentUs = us;
+        }
+      }
+    return this.currentUs;
+  }
   onSaveTurno(turnoForm: NgForm): void {
+    this.getUserbyUsId();
     this.turno = turnoForm.value;
     this.turno.userId = this.userId;
     this.turno.estado = 'reservado';
+    if (this.turno.cliente === undefined || this.turno.cliente == null || this.turno.cliente === '') {
+      this.turno.cliente = this.currentUs.nombre + ' ' + this.currentUs.apellido;
+    }
     if (turnoForm.value.id == null) {
       // New
       this.dataApi.agregarTurno(this.turno);

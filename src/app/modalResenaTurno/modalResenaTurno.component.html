@@ -25,9 +25,9 @@
                             </ng-template>
                         </div>
                     </div>
-                    <div class="modal-footer ">
-                        <button type="button " class="btn btn-secondary" #btnClose data-dismiss="modal ">Salir</button>
-                        <button *ngIf="(isAdmin || this.roles.especialista) && this.dataApi.selectedTurno.estado != 'finalizado'" type="submit " class="btn btn-primary ">Guardar Reseña</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">Salir</button>
+                        <button *ngIf="(isAdmin || this.roles.especialista) && this.dataApi.selectedTurno.estado != 'finalizado'" type="submit" class="btn btn-outline-primary btn-sm">Guardar Reseña</button>
                     </div>
                 </form>
             </div>

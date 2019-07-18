@@ -26,8 +26,6 @@ export class DataApiService {
     this.especialidades = this.listaEspecialistas.valueChanges();
     this.listaClientes = afs.collection<ClienteInterface>('cliente');
     this.clientes = this.listaClientes.valueChanges();
-    this.listaEncuestas = afs.collection<EncuestaInterface>('encuestas');
-    this.encuestas = this.listaEncuestas.valueChanges();
     this.listaUsers = afs.collection<UserInterface>('users');
     this.users = this.listaUsers.valueChanges();
   }
@@ -37,7 +35,22 @@ export class DataApiService {
   private turnoDoc: AngularFirestoreDocument<turnoInteface>;
   private turno: Observable<turnoInteface>;
   public selectedTurno: turnoInteface = {
-    id: null
+    id: '',
+    cliente: '',
+    userId: '',
+    especialidad: '',
+    especialista: '',
+    estado: '',
+    fecha_hora: '',
+    hora_turno: '',
+    resena_especialista: '',
+    encuesta: {
+      puntajeEspecialista : 0,
+      puntajeClinica: 0,
+      review : '',
+      user: '',
+      especialista: '',
+    }
   };
 
   private listaEspecialistas: AngularFirestoreCollection<Especialistas>;
@@ -56,10 +69,35 @@ export class DataApiService {
   private user: Observable<UserInterface>;
   public selectedUser: UserInterface = {
     id: null,
+    nombre: '',
+    email: '',
+    foto: '',
+    apellido: '',
+    telefono: '',
+    cobertura: '',
+    obraSocial: '',
+    nroCarnet: '',
     roles: {
       cliente: false,
       especialista: false,
-      admin: false
+      admin: true
+    }
+  };
+  public currentUser: UserInterface = {
+    id: null,
+    userId: '',
+    nombre: '',
+    email: '',
+    foto: '',
+    apellido: '',
+    telefono: '',
+    cobertura: '',
+    obraSocial: '',
+    nroCarnet: '',
+    roles: {
+      cliente: false,
+      especialista: false,
+      admin: true
     }
   };
 
@@ -70,60 +108,6 @@ export class DataApiService {
   public selectedCliente: ClienteInterface = {
     id: null
   };
-
-  private listaEncuestas: AngularFirestoreCollection<EncuestaInterface>;
-  private encuestas: Observable<EncuestaInterface[]>;
-  private encuestaDoc: AngularFirestoreDocument<EncuestaInterface>;
-  private encuesta: Observable<EncuestaInterface>;
-  public selectedEncuesta: EncuestaInterface = {
-    id: null
-  };
-
-  getClientes() {
-    return this.clientes = this.listaClientes.snapshotChanges()
-    .pipe(map(changes => {
-      return changes.map(action => {
-        const data = action.payload.doc.data() as ClienteInterface;
-        data.id = action.payload.doc.id;
-        return data;
-      });
-    }));
-  }
-  modificarCliente(cliente: ClienteInterface) {
-    const idCliente = cliente.id;
-    this.clienteDoc = this.afs.doc<ClienteInterface>(`cliente/${idCliente}`);
-    this.clienteDoc.update(cliente);
-  }
-  agregarCliente(cliente: ClienteInterface) {
-    this.listaClientes.add(cliente);
-  }
-  borrarCliente(idCliente: string) {
-    this.clienteDoc = this.afs.doc<ClienteInterface>(`cliente/${idCliente}`);
-    this.clienteDoc.delete();
-  }
-
-  getEncuesta() {
-    return this.encuestas = this.listaEncuestas.snapshotChanges()
-    .pipe(map(changes => {
-      return changes.map(action => {
-        const data = action.payload.doc.data() as EncuestaInterface;
-        data.id = action.payload.doc.id;
-        return data;
-      });
-    }));
-  }
-  modificarEncuesta(cliente: EncuestaInterface) {
-    const idEncuesta = cliente.id;
-    this.encuestaDoc = this.afs.doc<EncuestaInterface>(`encuestas/${idEncuesta}`);
-    this.encuestaDoc.update(cliente);
-  }
-  agregarEncuesta(encuesta: EncuestaInterface) {
-    this.listaEncuestas.add(encuesta);
-  }
-  borrarEncuesta(idEncuesta: string) {
-    this.encuestaDoc = this.afs.doc<EncuestaInterface>(`encuestas/${idEncuesta}`);
-    this.encuestaDoc.delete();
-  }
 
   getTurnos() {
     return this.turnos = this.listaTurnos.snapshotChanges()
@@ -217,6 +201,17 @@ export class DataApiService {
          return data;
        });
      }));
+ }
+ getUserDataUserbyRegistry(registry): any {
+  let user: UserInterface;
+  this.getUsers().subscribe( usuarios => {
+    for (let us of usuarios) {
+      if (us.userId === registry) {
+        user = us;
+        }
+      }
+    return user;
+  });
  }
   agregarTurno(turno: turnoInteface): void {
     this.listaTurnos.add(turno).then(result => {

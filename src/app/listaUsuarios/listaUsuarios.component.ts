@@ -22,6 +22,7 @@ export class ListaUsuariosComponent implements OnInit {
   ngOnInit() {
     this.getUsuarios();
     this.getCurrentUser();
+    // tslint:disable-next-line: no-string-literal
     this.filter = this.route.snapshot.params['filter'];
   }
   getUsuarios() {
@@ -34,7 +35,9 @@ export class ListaUsuariosComponent implements OnInit {
       if (auth) {
         this.userId = auth.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
+          if (userRole !== undefined) {
           this.isAdmin = userRole.roles.admin;
+          }
         });
       }
     });
@@ -47,7 +50,6 @@ export class ListaUsuariosComponent implements OnInit {
     }
   }
   modificarUsuario(user: UserInterface) {
-    debugger;
     this.dataApi.selectedUser = Object.assign({}, user);
   }
   mostrarDatos(usuarios) {

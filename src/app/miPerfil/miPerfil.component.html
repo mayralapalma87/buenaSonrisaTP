@@ -113,6 +113,9 @@
                             </div>
                         </div>
                         <br>
+                        <div id='info' *ngIf="this.info">
+                            <p> Su informacion a sido modificada exitosamente!</p>
+                        </div>
                         <div id='error' *ngIf="this.haveError">
                             <p> Oh no! ah ocurrido un error! </p>
                             <p> {{this.error}} </p>

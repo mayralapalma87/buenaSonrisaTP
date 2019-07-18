@@ -50,8 +50,10 @@ export class RegistrarseComponent implements OnInit {
         this.isLogged = true;
         this.userId = us.uid;
         this.authservice.isUserAdmin(this.userId).subscribe(userRole => {
+          if (userRole !== undefined) {
           this.isAdmin = userRole.roles.admin;
           this.user.roles  = userRole.roles;
+          }
       });
     } else {
         this.isLogged = false;

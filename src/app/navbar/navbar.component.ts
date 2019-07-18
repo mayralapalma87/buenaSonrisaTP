@@ -31,14 +31,12 @@ export class NavbarComponent implements OnInit {
   getCurrentUser() {
     this.auth.isAuth().subscribe(us => {
       if (us) {
-        console.log('UserData: ', us);
         this.isLogged = true;
         this.userId = us.uid;
         this.user.nombre = us.displayName;
         this.user.email = us.email;
         this.user.foto = us.photoURL;
         this.auth.isUserAdmin(us.uid).subscribe(userRole => {
-          console.log('UserDataRole: ', userRole);
           if (userRole !== undefined) {
             this.isAdmin = userRole.roles.admin;
             this.user.roles  = userRole.roles;
