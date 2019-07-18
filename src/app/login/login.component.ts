@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.authservice.onLogout()
     .then((res) => {
       this._ngZone.run(() => {
-        this.router.navigate(['login']);
+        this.router.navigate(['home']);
       });
     }).catch();
   }
