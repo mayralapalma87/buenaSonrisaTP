@@ -8,6 +8,9 @@
         </div>
     </div>
 </div> -->
+<h5 class="modal-title" id="modalNuevoUsuarioLabel">
+    Listado de Turnos
+</h5>
 <div class="table-responsive-md">
     <table class="table table-hover">
         <thead>
@@ -25,7 +28,7 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let turno of turnos">
-                <tr *ngIf="turno.userId == this.userId || isAdmin">
+                <tr *ngIf="turno.userId == this.userId || isAdmin || this.user.roles.especialista">
                     <td>{{turno.cliente}}</td>
                     <td>{{turno.especialidad}}</td>
                     <td>{{turno.especialista}}</td>
@@ -39,7 +42,7 @@
                             <button class="btn btn-secondary" disabled="true">Modificar</button>
                         </td>
                     </ng-template>
-                    <td *ngIf="turno.userId == this.userId || isAdmin; else noAdmin">
+                    <td *ngIf="turno.estado == 'reservado' && (turno.userId == this.userId || isAdmin || this.user.roles.especialista); else noAdmin">
                         <button class="btn btn-block btn-danger" (click)="cancelarTurno(turno.id)">Cancelar</button>
                     </td>
                     <ng-template #noAdmin>
@@ -48,7 +51,7 @@
                         </td>
                     </ng-template>
                     <!-- <td *ngIf='turno.estado == "realizado" && turno.userId == userId ; else encuestaDisable'> -->
-                    <td *ngIf='turno.estado == "realizado" ; else encuestaDisable'>
+                    <td *ngIf="turno.estado !== 'reservado' ; else encuestaDisable">
                         <button class="btn btn-block btn-warning" id="buttonEncuesta" name="buttonEncuesta" data-toggle="modal" data-target="#modalEncuesta" (click)="modificarTurno(turno)">Encuesta de satisfacción</button>
                     </td>
                     <ng-template #encuestaDisable>
@@ -56,7 +59,7 @@
                             <button id="buttonEncuesta" name="buttonEncuesta" class="btn btn-block btn-secondary" disabled=true>Encuesta de satisfacción</button>
                         </td>
                     </ng-template>
-                    <td *ngIf='turno.estado == "realizado"; else resenaDisable'>
+                    <td *ngIf='turno.estado !== "reservado"; else resenaDisable'>
                         <button class="btn btn-block btn-info" data-toggle="modal" data-target="#modalResenaTurno" (click)="modificarTurno(turno)">Reseña del profesional</button>
                     </td>
                     <ng-template #resenaDisable>

@@ -32,9 +32,21 @@ export class AgendaEspecialistaComponent implements OnInit {
     this.authService.isAuth().subscribe(auth => {
       if (auth) {
         this.userId = auth.uid;
-        this.authService.isUserAdmin(this.userId).subscribe(userRole => {
-          this.isAdmin = userRole.roles.admin;
-          this.rol = userRole.roles;
+        this.authService.isUserAdmin(auth.uid).subscribe(userRole => {
+          if (userRole !== undefined) {
+            this.isAdmin = userRole.roles.admin;
+            this.rol  = userRole.roles;
+          }
+          else {
+            this.dataApi.getUsers().subscribe( usuarios => {
+              for (let us of usuarios) {
+                if (us.userId === this.userId) {
+                  this.isAdmin = us.roles.admin;
+                  this.rol  = us.roles;
+                  }
+                }
+            });
+          }
         });
       }
     });

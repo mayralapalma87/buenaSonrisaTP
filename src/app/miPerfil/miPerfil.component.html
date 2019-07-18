@@ -41,6 +41,9 @@
                                     <input id="name" name="name" type="text" [(ngModel)]="user.nombre" placeholder="" class="form-control input-md">
                                 </div>
                             </div>
+                        </div>
+                        <br>
+                        <div class="row text-left">
                             <div class="col">
                                 <label class="col-md-10 control-label" for="surname">Apellido</label>
                                 <div class="col-md-10">
@@ -48,7 +51,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
                         <div class="row text-left">
                             <div class="col">
                                 <label class="col-md-10 control-label" for="telefono">Numero de Telefono</label>
@@ -58,8 +60,8 @@
                             </div>
                         </div>
                         <br>
-                        <div class="form-row" *ngIf="user.roles.especialista">
-                            <div class="form-group col-md-6">
+                        <div class="row text-left" *ngIf="user.roles.especialista">
+                            <div class="col">
                                 <label for="especialidad">Especialidad:</label>
                                 <select name="especialidad" class="form-control" placeholder="Seleccione..." [(ngModel)]="user.especialidad">
                                 <option selected>Seleccionar...</option>
@@ -98,6 +100,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <!-- Carga de imagen -->
                         <div class="form-group text-left">
                             <label class="col-md-10 control-label" for="file">Cargar Foto de perfil</label>

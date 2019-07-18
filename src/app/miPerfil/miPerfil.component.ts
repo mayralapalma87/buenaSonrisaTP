@@ -1,3 +1,4 @@
+import { Especialidad } from './../models/especialidad';
 import { DataApiService } from './../services/data-api.service';
 import { UserInterface, Roles } from './../models/user';
 import { AuthService } from './../services/auth.service';
@@ -166,7 +167,7 @@ urlImage: Observable<string>;
         if (userService) {
           if (this.inpupImageUser.nativeElement.value !== null) {
             userService.updateProfile({
-            displayName: this.user.nombre + ' ' + this.user.apellido,
+            displayName: this.user.nombre,
             photoURL: this.inpupImageUser.nativeElement.value,
             phoneNumber: this.user.telefono
           }).then( () => {
@@ -180,7 +181,7 @@ urlImage: Observable<string>;
           });
         } else {
           userService.updateProfile({
-            displayName: this.user.nombre + ' ' + this.user.apellido,
+            displayName: this.user.nombre,
             phoneNumber: this.user.telefono
           }).then( () => {
             console.log('User updated.');

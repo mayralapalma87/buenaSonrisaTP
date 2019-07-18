@@ -36,6 +36,16 @@ export class ModalResenaTurnoComponent implements OnInit {
           if (userRole !== undefined) {
             this.roles = userRole.roles;
           }
+          else {
+            this.dataApi.getUsers().subscribe( usuarios => {
+              for (let us of usuarios) {
+                if (us.userId === this.userId) {
+                  this.isAdmin = us.roles.admin;
+                  this.roles  = us.roles;
+                  }
+                }
+            });
+          }
         });
       }
     });

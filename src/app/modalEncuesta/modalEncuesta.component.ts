@@ -27,6 +27,15 @@ export class ModalEncuestaComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
+    if (this.dataApi.selectedTurno.encuesta === undefined) {
+      this.dataApi.selectedTurno.encuesta = {
+        puntajeEspecialista : 0,
+        puntajeClinica: 0,
+        review : '',
+        user: '',
+        especialista: '',
+      };
+    }
   }
   getCurrentUser() {
     this.authService.isAuth().subscribe(auth => {
@@ -34,7 +43,18 @@ export class ModalEncuestaComponent implements OnInit {
         this.userUid = auth.uid;
         this.authService.isUserAdmin(auth.uid).subscribe(userRole => {
           if (userRole !== undefined) {
-            this.roles = userRole.roles;
+            this.isAdmin = userRole.roles.admin;
+            this.roles  = userRole.roles;
+          }
+          else {
+            this.dataApi.getUsers().subscribe( usuarios => {
+              for (let us of usuarios) {
+                if (us.userId === this.userId) {
+                  this.isAdmin = us.roles.admin;
+                  this.roles  = us.roles;
+                  }
+                }
+            });
           }
         });
       }

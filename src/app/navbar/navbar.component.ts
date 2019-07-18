@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../../app/services/auth.service';
 import { UserInterface } from '../models/user';
+import { DataApiService } from '../services/data-api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { UserInterface } from '../models/user';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: AuthService, private afsauth: AngularFireAuth) { }
+  constructor(private auth: AuthService, private afsauth: AngularFireAuth, private dataApi: DataApiService) { }
 // tslint:disable-next-line: variable-name
   public app_name = 'BuenaSonrisa';
 // tslint:disable-next-line: no-inferrable-types
@@ -40,6 +41,16 @@ export class NavbarComponent implements OnInit {
           if (userRole !== undefined) {
             this.isAdmin = userRole.roles.admin;
             this.user.roles  = userRole.roles;
+          }
+          else {
+            this.dataApi.getUsers().subscribe( usuarios => {
+              for (let us of usuarios) {
+                if (us.userId === this.userId) {
+                  this.isAdmin = us.roles.admin;
+                  this.user  = us;
+                  }
+                }
+            });
           }
       });
     } else {

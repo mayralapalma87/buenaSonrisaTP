@@ -5,6 +5,7 @@ import { turnoInteface } from '../models/turnoInterface';
 import { NgForm } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
 import { from } from 'rxjs';
+import { UserInterface } from '../models/user';
 
 @Component({
 // tslint:disable-next-line: component-selector
@@ -22,7 +23,13 @@ export class MisTurnosComponent implements OnInit {
   public userId: string = null;
   public cliente: string = null;
   filterBusqueda = '';
-
+  user: UserInterface = {
+    id: '',
+    nombre: '',
+    email: '',
+    foto: '',
+    roles: {}
+  };
   ngOnInit() {
     this.getTurnos();
     this.getCurrentUser();
@@ -34,6 +41,17 @@ export class MisTurnosComponent implements OnInit {
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
           if (userRole !== undefined) {
           this.isAdmin = userRole.roles.admin;
+          this.user.roles  = userRole.roles;
+          }
+          else {
+            this.dataApi.getUsers().subscribe( usuarios => {
+              for (let us of usuarios) {
+                if (us.userId === this.userId) {
+                  this.isAdmin = us.roles.admin;
+                  this.user.roles  = us.roles;
+                  }
+                }
+            });
           }
         });
       }
